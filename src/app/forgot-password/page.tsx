@@ -18,6 +18,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import { Briefcase, ArrowLeft } from "lucide-react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -43,44 +44,51 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-secondary/50">
-      <Card className="w-full max-w-md mx-4">
-        <CardHeader className="text-center">
-          <Link href="/" className="flex items-center justify-center gap-2 mb-4">
-            <Briefcase className="w-8 h-8 text-primary" />
-          </Link>
-          <CardTitle className="text-2xl font-bold">Forgot Your Password?</CardTitle>
-          <CardDescription>No problem. Enter your email and we'll send you a link to reset it.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="name@example.com" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? "Sending..." : "Send Reset Link"}
-              </Button>
-            </form>
-          </Form>
-          <div className="mt-6 text-center text-sm">
-             <Link href="/login" className="font-medium text-primary hover:underline flex items-center justify-center gap-1">
-                <ArrowLeft className="w-4 h-4" />
-                Back to Login
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
+    <div className="flex flex-col min-h-screen bg-secondary/50">
+        <div className="container mx-auto flex-1 flex flex-col items-center justify-center px-4">
+            <div className="w-full max-w-md">
+                <div className="mb-4">
+                    <Breadcrumbs />
+                </div>
+                <Card className="w-full">
+                    <CardHeader className="text-center">
+                    <Link href="/" className="flex items-center justify-center gap-2 mb-4">
+                        <Briefcase className="w-8 h-8 text-primary" />
+                    </Link>
+                    <CardTitle className="text-2xl font-bold">Forgot Your Password?</CardTitle>
+                    <CardDescription>No problem. Enter your email and we'll send you a link to reset it.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Email</FormLabel>
+                                <FormControl>
+                                <Input placeholder="name@example.com" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                        />
+                        <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
+                            {form.formState.isSubmitting ? "Sending..." : "Send Reset Link"}
+                        </Button>
+                        </form>
+                    </Form>
+                    <div className="mt-6 text-center text-sm">
+                        <Link href="/login" className="font-medium text-primary hover:underline flex items-center justify-center gap-1">
+                            <ArrowLeft className="w-4 h-4" />
+                            Back to Login
+                        </Link>
+                    </div>
+                    </CardContent>
+                </Card>
+            </div>
+        </div>
     </div>
   );
 }

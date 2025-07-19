@@ -22,6 +22,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Briefcase } from "lucide-react";
 import { useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -106,83 +107,90 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-secondary/50">
-      <Card className="w-full max-w-md mx-4">
-        <CardHeader className="text-center">
-          <Link href="/" className="flex items-center justify-center gap-2 mb-4">
-            <Briefcase className="w-8 h-8 text-primary" />
-          </Link>
-          <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
-          <CardDescription>Enter your credentials to access your account.</CardDescription>
-        </CardHeader>
-        <CardContent>
-           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="name@example.com" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex items-center justify-between">
-                        <FormLabel>Password</FormLabel>
-                        <Link href="/forgot-password" className="text-sm font-medium text-primary hover:underline">
-                            Forgot password?
+    <div className="flex flex-col min-h-screen bg-secondary/50">
+        <div className="container mx-auto flex-1 flex flex-col items-center justify-center px-4">
+            <div className="w-full max-w-md">
+                <div className="mb-4">
+                    <Breadcrumbs />
+                </div>
+                 <Card className="w-full">
+                    <CardHeader className="text-center">
+                    <Link href="/" className="flex items-center justify-center gap-2 mb-4">
+                        <Briefcase className="w-8 h-8 text-primary" />
+                    </Link>
+                    <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
+                    <CardDescription>Enter your credentials to access your account.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Email</FormLabel>
+                                <FormControl>
+                                <Input placeholder="name@example.com" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="password"
+                            render={({ field }) => (
+                            <FormItem>
+                                <div className="flex items-center justify-between">
+                                    <FormLabel>Password</FormLabel>
+                                    <Link href="/forgot-password" className="text-sm font-medium text-primary hover:underline">
+                                        Forgot password?
+                                    </Link>
+                                </div>
+                                <FormControl>
+                                <Input type="password" placeholder="••••••••" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                        />
+                        <Button type="submit" className="w-full" disabled={form.formState.isSubmitting || isLoading}>
+                            {form.formState.isSubmitting || isLoading ? "Signing In..." : "Sign In"}
+                        </Button>
+                        </form>
+                    </Form>
+
+                    <div className="relative my-6">
+                        <div className="absolute inset-0 flex items-center">
+                            <span className="w-full border-t"></span>
+                        </div>
+                        <div className="relative flex justify-center text-xs uppercase">
+                            <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                        <Button variant="outline">
+                            <GoogleIcon className="mr-2 h-4 w-4" />
+                            Google
+                        </Button>
+                        <Button variant="outline">
+                            <LinkedInIcon className="mr-2 h-4 w-4 fill-current" />
+                            LinkedIn
+                        </Button>
+                    </div>
+
+                    <div className="mt-6 text-center text-sm">
+                        Don't have an account?{" "}
+                        <Link href="/register" className="font-medium text-primary hover:underline">
+                        Register here
                         </Link>
                     </div>
-                    <FormControl>
-                      <Input type="password" placeholder="••••••••" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" className="w-full" disabled={form.formState.isSubmitting || isLoading}>
-                {form.formState.isSubmitting || isLoading ? "Signing In..." : "Sign In"}
-              </Button>
-            </form>
-          </Form>
-
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t"></span>
+                    </CardContent>
+                </Card>
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <Button variant="outline">
-                <GoogleIcon className="mr-2 h-4 w-4" />
-                Google
-            </Button>
-            <Button variant="outline">
-                 <LinkedInIcon className="mr-2 h-4 w-4 fill-current" />
-                LinkedIn
-            </Button>
-          </div>
-
-          <div className="mt-6 text-center text-sm">
-            Don't have an account?{" "}
-            <Link href="/register" className="font-medium text-primary hover:underline">
-              Register here
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
+        </div>
     </div>
   );
 }

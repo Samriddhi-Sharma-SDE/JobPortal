@@ -23,6 +23,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Briefcase } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 const formSchema = z.object({
     role: z.enum(["company", "employee"], {
@@ -106,141 +107,148 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-secondary/50 py-12">
-      <Card className="w-full max-w-lg mx-4">
-        <CardHeader className="text-center">
-          <Link href="/" className="flex items-center justify-center gap-2 mb-4">
-            <Briefcase className="w-8 h-8 text-primary" />
-          </Link>
-          <CardTitle className="text-2xl font-bold">Create an Account</CardTitle>
-          <CardDescription>Join our network of professionals and companies.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="role"
-                render={({ field }) => (
-                  <FormItem className="space-y-3">
-                    <FormLabel>I am a...</FormLabel>
-                    <FormControl>
-                      <RadioGroup
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                        className="grid grid-cols-2 gap-4"
-                      >
-                        <FormItem>
-                          <RadioGroupItem value="employee" id="employee" className="peer sr-only" />
-                          <Label htmlFor="employee" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
-                            Job Seeker
-                          </Label>
+    <div className="flex flex-col min-h-screen bg-secondary/50">
+      <div className="container mx-auto flex-1 flex flex-col items-center justify-center px-4 py-12">
+        <div className="w-full max-w-lg">
+            <div className="mb-4">
+                <Breadcrumbs />
+            </div>
+            <Card className="w-full">
+                <CardHeader className="text-center">
+                <Link href="/" className="flex items-center justify-center gap-2 mb-4">
+                    <Briefcase className="w-8 h-8 text-primary" />
+                </Link>
+                <CardTitle className="text-2xl font-bold">Create an Account</CardTitle>
+                <CardDescription>Join our network of professionals and companies.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                    <FormField
+                        control={form.control}
+                        name="role"
+                        render={({ field }) => (
+                        <FormItem className="space-y-3">
+                            <FormLabel>I am a...</FormLabel>
+                            <FormControl>
+                            <RadioGroup
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                                className="grid grid-cols-2 gap-4"
+                            >
+                                <FormItem>
+                                <RadioGroupItem value="employee" id="employee" className="peer sr-only" />
+                                <Label htmlFor="employee" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
+                                    Job Seeker
+                                </Label>
+                                </FormItem>
+                                <FormItem>
+                                <RadioGroupItem value="company" id="company" className="peer sr-only" />
+                                <Label htmlFor="company" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
+                                    Company
+                                </Label>
+                                </FormItem>
+                            </RadioGroup>
+                            </FormControl>
+                            <FormMessage />
                         </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                            <FormItem>
+                            <FormLabel>{role === 'company' ? 'Your Full Name' : 'Full Name'}</FormLabel>
+                            <FormControl>
+                                <Input placeholder="John Doe" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                            </FormItem>
+                        )}
+                        />
+
+                    {role === 'company' && (
+                        <FormField
+                        control={form.control}
+                        name="companyName"
+                        render={({ field }) => (
+                            <FormItem>
+                            <FormLabel>Company Name</FormLabel>
+                            <FormControl>
+                                <Input placeholder="Innovate Inc." {...field} />
+                            </FormControl>
+                            <FormMessage />
+                            </FormItem>
+                        )}
+                        />
+                    )}
+                    
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
                         <FormItem>
-                           <RadioGroupItem value="company" id="company" className="peer sr-only" />
-                           <Label htmlFor="company" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
-                            Company
-                          </Label>
+                            <FormLabel>Email</FormLabel>
+                            <FormControl>
+                            <Input placeholder="name@example.com" {...field} />
+                            </FormControl>
+                            <FormMessage />
                         </FormItem>
-                      </RadioGroup>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                        )}
+                    />
 
-              <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{role === 'company' ? 'Your Full Name' : 'Full Name'}</FormLabel>
-                      <FormControl>
-                        <Input placeholder="John Doe" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                    <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Password</FormLabel>
+                            <FormControl>
+                            <Input type="password" placeholder="••••••••" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                        )}
+                    />
 
-              {role === 'company' && (
-                <FormField
-                  control={form.control}
-                  name="companyName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Company Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Innovate Inc." {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              )}
-            
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="name@example.com" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                    <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
+                        {form.formState.isSubmitting ? "Creating Account..." : "Create Account"}
+                    </Button>
+                    </form>
+                </Form>
 
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input type="password" placeholder="••••••••" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <div className="relative my-6">
+                    <div className="absolute inset-0 flex items-center">
+                        <span className="w-full border-t"></span>
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase">
+                        <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
+                    </div>
+                </div>
 
-              <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? "Creating Account..." : "Create Account"}
-              </Button>
-            </form>
-          </Form>
+                    <div className="grid grid-cols-2 gap-4">
+                        <Button variant="outline">
+                            <GoogleIcon className="mr-2 h-4 w-4" />
+                            Google
+                        </Button>
+                        <Button variant="outline">
+                            <LinkedInIcon className="mr-2 h-4 w-4 fill-current" />
+                            LinkedIn
+                        </Button>
+                    </div>
 
-           <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t"></span>
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
-            </div>
-          </div>
-
-            <div className="grid grid-cols-2 gap-4">
-                <Button variant="outline">
-                    <GoogleIcon className="mr-2 h-4 w-4" />
-                    Google
-                </Button>
-                <Button variant="outline">
-                    <LinkedInIcon className="mr-2 h-4 w-4 fill-current" />
-                    LinkedIn
-                </Button>
-            </div>
-
-           <div className="mt-6 text-center text-sm">
-            Already have an account?{" "}
-            <Link href="/login" className="font-medium text-primary hover:underline">
-              Login here
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
+                <div className="mt-6 text-center text-sm">
+                    Already have an account?{" "}
+                    <Link href="/login" className="font-medium text-primary hover:underline">
+                    Login here
+                    </Link>
+                </div>
+                </CardContent>
+            </Card>
+        </div>
+      </div>
     </div>
   );
 }
