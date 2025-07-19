@@ -26,18 +26,20 @@ export default function EmployeeDashboard() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    if (!authLoading) {
-      if (!user || user.role !== 'employee') {
-        router.push('/login');
-      } else {
+    // if (!authLoading) {
+    //   if (!user || user.role !== 'employee') {
+    //     router.push('/login');
+    //   } else {
         setIsLoading(true);
         const allJobs = getJobs();
-        const userApplications = getApplicationsForEmployee(user.id);
+        // Assuming a mock employeeId for viewing purposes when not logged in
+        const employeeIdForViewing = user?.id || 'employee-1';
+        const userApplications = getApplicationsForEmployee(employeeIdForViewing);
         setJobs(allJobs);
         setApplications(userApplications);
         setIsLoading(false);
-      }
-    }
+    //   }
+    // }
   }, [user, authLoading, router]);
 
   const filteredJobs = useMemo(() => {

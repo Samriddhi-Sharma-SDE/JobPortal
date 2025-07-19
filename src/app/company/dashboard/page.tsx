@@ -43,18 +43,20 @@ export default function CompanyDashboard() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!authLoading) {
-      if (!user || user.role !== 'company' || !user.companyId) {
-        router.push('/login');
-      } else {
+    // if (!authLoading) {
+    //   if (!user || user.role !== 'company' || !user.companyId) {
+    //     router.push('/login');
+    //   } else {
         setIsLoading(true);
-        const companyJobs = getJobsByCompany(user.companyId);
-        const companyApplications = getApplicationsForCompany(user.companyId);
+        // Assuming a mock companyId for viewing purposes when not logged in
+        const companyIdForViewing = user?.companyId || 'company-1'; 
+        const companyJobs = getJobsByCompany(companyIdForViewing);
+        const companyApplications = getApplicationsForCompany(companyIdForViewing);
         setJobs(companyJobs);
         setApplications(companyApplications);
         setIsLoading(false);
-      }
-    }
+    //   }
+    // }
   }, [user, authLoading, router]);
 
   if (authLoading || isLoading) {

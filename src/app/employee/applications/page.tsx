@@ -25,16 +25,18 @@ export default function EmployeeApplicationsPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!authLoading) {
-      if (!user || user.role !== 'employee') {
-        router.push('/login');
-      } else {
+    // if (!authLoading) {
+    //   if (!user || user.role !== 'employee') {
+    //     router.push('/login');
+    //   } else {
         setIsLoading(true);
-        const userApplications = getApplicationsForEmployee(user.id);
+        // Assuming a mock employeeId for viewing purposes when not logged in
+        const employeeIdForViewing = user?.id || 'employee-1';
+        const userApplications = getApplicationsForEmployee(employeeIdForViewing);
         setApplications(userApplications.sort((a,b) => b.appliedAt - a.appliedAt));
         setIsLoading(false);
-      }
-    }
+    //   }
+    // }
   }, [user, authLoading, router]);
 
   if (authLoading || isLoading) {

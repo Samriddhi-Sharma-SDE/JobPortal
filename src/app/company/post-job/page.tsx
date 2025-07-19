@@ -60,13 +60,13 @@ export default function PostJobPage() {
   const jobTitle = form.watch("title");
   const jobDescription = form.watch("description");
 
-  useEffect(() => {
-    if (!authLoading) {
-      if (!user || user.role !== 'company') {
-        router.push('/login');
-      }
-    }
-  }, [user, authLoading, router]);
+  // useEffect(() => {
+  //   if (!authLoading) {
+  //     if (!user || user.role !== 'company') {
+  //       router.push('/login');
+  //     }
+  //   }
+  // }, [user, authLoading, router]);
 
   const handleAddKeyword = () => {
     if (keywordInput.trim() !== "" && !fields.some(field => field.value === keywordInput.trim())) {
@@ -81,12 +81,14 @@ export default function PostJobPage() {
   }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!user || !user.companyId) {
+    // Mock companyId when not logged in
+    const companyId = user?.companyId || 'company-1'; 
+    if (!companyId) {
         toast({ variant: 'destructive', title: 'Error', description: 'Could not identify your company.' });
         return;
     }
     try {
-      addJob({ ...values, companyId: user.companyId });
+      addJob({ ...values, companyId: companyId });
       toast({
         title: "Job Posted Successfully",
         description: `Your new role "${values.title}" is now live.`,
@@ -101,7 +103,7 @@ export default function PostJobPage() {
     }
   }
 
-  if (authLoading || !user) {
+  if (authLoading) {
     return (
       <DashboardLayout title="Post a New Job" navItems={companyNavItems}>
         <div>Loading...</div>
