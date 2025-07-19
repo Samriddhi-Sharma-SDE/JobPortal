@@ -1,19 +1,12 @@
 
-"use client";
-
-import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
 import { getJobById, getJobs } from '@/lib/mock-db';
 import type { Job } from '@/lib/types';
-import { useAuth } from '@/hooks/use-auth';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
-import { ApplicationForm } from '@/components/ApplicationForm';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
 import { Briefcase, MapPin } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { ApplyPageClient } from '@/components/ApplyPageClient';
 
 export async function generateStaticParams() {
     const jobs = getJobs();
@@ -22,49 +15,9 @@ export async function generateStaticParams() {
     }));
 }
 
-export default function ApplyPage() {
-    const { id } = useParams();
-    const { user, isLoading: authLoading } = useAuth();
-    const router = useRouter();
-    const { toast } = useToast();
-
-    const [job, setJob] = useState<Job | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        // if (authLoading) return;
-        // if (!user || user.role !== 'employee') {
-        //     toast({ variant: 'destructive', title: 'Access Denied', description: 'Please log in as an employee to apply.' });
-        //     router.push(`/login?redirect=/jobs/${id}/apply`);
-        //     return;
-        // }
-
-        if (id) {
-            const jobId = Array.isArray(id) ? id[0] : id;
-            const jobData = getJobById(jobId);
-            setJob(jobData);
-        }
-        setIsLoading(false);
-    }, [id, user, authLoading, router, toast]);
-
-    if (isLoading || authLoading) {
-        return (
-             <div className="flex flex-col min-h-screen">
-                <SiteHeader />
-                <main className="flex-1 bg-secondary/50 py-16">
-                    <div className="container mx-auto max-w-4xl px-4">
-                        <Breadcrumbs />
-                        <div className="mt-6">
-                            <Skeleton className="h-8 w-1/2 mb-2" />
-                            <Skeleton className="h-4 w-1/4 mb-8" />
-                            <Skeleton className="h-96 w-full" />
-                        </div>
-                    </div>
-                </main>
-                <SiteFooter />
-            </div>
-        )
-    }
+export default function ApplyPage({ params }: { params: { id: string } }) {
+    const { id } = params;
+    const job = getJobById(id);
 
     if (!job) {
         return (
@@ -77,15 +30,6 @@ export default function ApplyPage() {
             </div>
         );
     }
-    
-    // For viewing purposes, we create a mock user if one isn't logged in.
-    const mockUser = user || {
-        id: 'employee-1',
-        email: 'employee@joblink.local',
-        role: 'employee',
-        name: 'John Doe',
-        password: 'password'
-    };
     
     return (
         <div className="flex flex-col min-h-screen">
@@ -102,7 +46,7 @@ export default function ApplyPage() {
                             </CardDescription>
                         </CardHeader>
                     </Card>
-                    <ApplicationForm job={job} user={mockUser} />
+                    <ApplyPageClient job={job} />
                 </div>
             </main>
             <SiteFooter />
