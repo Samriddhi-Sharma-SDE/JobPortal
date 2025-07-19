@@ -63,15 +63,16 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
       <main className="flex-1">
-        <section className="relative h-screen flex items-center justify-center text-center px-4 sm:px-6 lg:px-8">
+        <section className="relative h-screen flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 overflow-hidden">
           <div 
-            className="absolute inset-0 bg-secondary/50 -z-10"
+            className="absolute inset-0 bg-background -z-10"
             style={{
               backgroundImage:
                 'radial-gradient(circle at 50% 50%, hsla(var(--primary) / 0.1), transparent 60%)',
             }}
           />
-           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-64 w-64 bg-primary/10 rounded-full blur-3xl" />
+           <div className="absolute -top-32 -left-32 -z-10 h-96 w-96 bg-primary/10 rounded-full blur-3xl" />
+           <div className="absolute -bottom-32 -right-32 -z-10 h-96 w-96 bg-accent/10 rounded-full blur-3xl" />
           <div className="relative">
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 font-headline">Find Your Next Opportunity, Locally.</h1>
             <p className="max-w-3xl mx-auto text-lg md:text-xl text-muted-foreground mb-8">
@@ -138,7 +139,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="py-20 md:py-24">
+        <section className="py-20 md:py-24 relative overflow-hidden">
+            <div className="absolute -left-48 -top-48 -z-10 h-96 w-96 bg-primary/5 rounded-full blur-3xl" />
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                  <div className="text-center mb-12">
                     <h2 className="text-3xl font-bold font-headline">Featured Jobs</h2>
@@ -146,7 +148,7 @@ export default function Home() {
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {featuredJobs.map((job, index) => (
-                        <Card key={index} className="flex flex-col transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                        <Card key={index} className="flex flex-col transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl bg-card/80 backdrop-blur-sm">
                             <CardHeader>
                                 <CardTitle>{job.title}</CardTitle>
                                 <CardDescription>{job.company} - {job.location}</CardDescription>
@@ -215,7 +217,8 @@ export default function Home() {
             </div>
         </section>
         
-        <section className="py-20 md:py-24">
+        <section className="py-20 md:py-24 relative overflow-hidden">
+             <div className="absolute -right-48 -bottom-48 -z-10 h-96 w-96 bg-accent/5 rounded-full blur-3xl" />
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl font-bold font-headline">Loved by Companies and Candidates</h2>
@@ -223,7 +226,7 @@ export default function Home() {
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {testimonials.map((testimonial, index) => (
-                        <Card key={index} className="flex flex-col justify-between bg-secondary/30 border-0">
+                        <Card key={index} className="flex flex-col justify-between bg-card/80 backdrop-blur-sm border-0 shadow-lg">
                             <CardContent className="pt-6">
                                 <div className="flex gap-0.5 text-yellow-500 mb-2">
                                   <Star className="w-5 h-5 fill-current" />
