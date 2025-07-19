@@ -32,12 +32,16 @@ export function SiteFooter() {
                  <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground">About Us</Link>
                  <Link href="/contact" className="text-sm text-muted-foreground hover:text-foreground">Contact</Link>
                  <Link href="/feedback" className="text-sm text-muted-foreground hover:text-foreground">Feedback</Link>
+             </div>
+          </div>
+          <Separator className="my-8" />
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+             <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Job Portal. All Rights Reserved.</p>
+             <div className="flex items-center gap-4">
                  <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground">Terms of Service</Link>
                  <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground">Privacy Policy</Link>
              </div>
           </div>
-          <Separator className="my-8" />
-          <p className="text-center text-sm text-muted-foreground">© {new Date().getFullYear()} Job Portal. All Rights Reserved.</p>
         </div>
       </footer>
     )
