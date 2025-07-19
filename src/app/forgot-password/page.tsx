@@ -1,3 +1,4 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
-import { Briefcase } from "lucide-react";
+import { Briefcase, ArrowLeft } from "lucide-react";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -49,7 +50,7 @@ export default function ForgotPasswordPage() {
             <Briefcase className="w-8 h-8 text-primary" />
           </Link>
           <CardTitle className="text-2xl font-bold">Forgot Your Password?</CardTitle>
-          <CardDescription>Enter your email and we'll send you a link to reset it.</CardDescription>
+          <CardDescription>No problem. Enter your email and we'll send you a link to reset it.</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -73,9 +74,9 @@ export default function ForgotPasswordPage() {
             </form>
           </Form>
           <div className="mt-6 text-center text-sm">
-            Remember your password?{" "}
-            <Link href="/login" className="font-medium text-primary hover:underline">
-              Login here
+             <Link href="/login" className="font-medium text-primary hover:underline flex items-center justify-center gap-1">
+                <ArrowLeft className="w-4 h-4" />
+                Back to Login
             </Link>
           </div>
         </CardContent>
