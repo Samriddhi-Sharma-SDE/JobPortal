@@ -1,3 +1,4 @@
+
 export interface User {
   id: string;
   email: string;
@@ -21,11 +22,12 @@ export interface Job {
   title: string;
   description: string;
   keywords: string[];
+  location: string;
   createdAt: number;
 }
 
 export interface Application {
-  id: string;
+  id:string;
   jobId: string;
   jobTitle: string;
   companyName: string;

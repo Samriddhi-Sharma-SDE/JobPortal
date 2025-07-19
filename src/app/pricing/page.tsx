@@ -1,3 +1,4 @@
+
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
@@ -7,33 +8,62 @@ import Link from "next/link";
 
 const tiers = [
     {
-        name: "Basic",
+        name: "Job Seeker",
         price: "Free",
-        description: "For individuals and small teams getting started.",
+        description: "For individuals looking for their next opportunity.",
+        features: [
+            "Unlimited job applications",
+            "Create a professional profile",
+            "Get job alerts",
+            "Community support"
+        ],
+        cta: "Sign Up Now",
+        href: "/register"
+    },
+    {
+        name: "Starter",
+        price: "$29",
+        priceSuffix: "/mo",
+        description: "For small companies hiring their first employees.",
         features: [
             "1 active job post",
             "50 applicants per job",
             "Basic company profile",
             "Email support"
         ],
-        cta: "Get Started",
-        href: "/register"
+        cta: "Choose Starter",
+        href: "/register",
     },
     {
-        name: "Pro",
-        price: "$49",
+        name: "Growth",
+        price: "$99",
         priceSuffix: "/mo",
-        description: "For growing companies that need more features.",
+        description: "For growing businesses that need more.",
         features: [
             "10 active job posts",
             "Unlimited applicants",
-            "Customizable company profile",
             "AI Keyword Suggestions",
+            "25 Resume Views per month",
             "Priority support"
         ],
-        cta: "Choose Pro",
+        cta: "Choose Growth",
         href: "/register",
         popular: true
+    },
+    {
+        name: "Scale",
+        price: "$249",
+        priceSuffix: "/mo",
+        description: "For established companies hiring at scale.",
+        features: [
+            "50 active job posts",
+            "Featured company listing",
+            "100 Resume Views per month",
+            "Advanced analytics",
+            "Dedicated support"
+        ],
+        cta: "Choose Scale",
+        href: "/register",
     },
     {
         name: "Enterprise",
@@ -41,10 +71,10 @@ const tiers = [
         description: "For large organizations with advanced needs.",
         features: [
             "Unlimited job posts",
-            "Dedicated account manager",
-            "Advanced analytics",
-            "API Access",
-            "SSO Integration"
+            "Unlimited Resume Views",
+            "API Access & SSO Integration",
+            "Branded career page",
+            "Dedicated account manager"
         ],
         cta: "Contact Sales",
         href: "/contact"
@@ -60,13 +90,13 @@ export default function PricingPage() {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl font-extrabold tracking-tight mb-4">Simple, Transparent Pricing</h1>
             <p className="text-lg text-muted-foreground">
-              Choose the plan that's right for you. No hidden fees, ever.
+              Choose the plan that's right for you. Free for job seekers, powerful for companies.
             </p>
           </div>
           
-          <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="mt-16 grid lg:grid-cols-5 gap-8 items-start">
             {tiers.map(tier => (
-              <Card key={tier.name} className={`flex flex-col ${tier.popular ? 'border-primary shadow-lg' : ''}`}>
+              <Card key={tier.name} className={`flex flex-col ${tier.popular ? 'border-primary shadow-lg scale-105' : ''} ${tier.name === 'Job Seeker' ? 'lg:col-span-2' : 'lg:col-span-1'}`}>
                 <CardHeader className="relative">
                   {tier.popular && <div className="absolute top-0 -translate-y-1/2 w-full flex justify-center"><div className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">MOST POPULAR</div></div>}
                   <CardTitle>{tier.name}</CardTitle>

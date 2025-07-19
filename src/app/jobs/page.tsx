@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -34,6 +35,7 @@ export default function JobsPage() {
     return jobs.filter(job => 
       job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.companyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      job.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.keywords.some(kw => kw.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   }, [jobs, searchTerm]);
@@ -53,7 +55,7 @@ export default function JobsPage() {
             <div className="relative w-full max-w-2xl mx-auto mb-12">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input
-                    placeholder="Search by title, company, or keyword..."
+                    placeholder="Search by title, company, location or keyword..."
                     className="pl-10 h-12 text-base"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -61,7 +63,7 @@ export default function JobsPage() {
             </div>
             
             {isLoading ? (
-                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {[...Array(6)].map((_, i) => (
                         <Card key={i}>
                             <CardHeader><Skeleton className="h-6 w-3/4" /></CardHeader>
@@ -76,22 +78,22 @@ export default function JobsPage() {
                              <CardHeader className="flex flex-row justify-between">
                                 <Skeleton className="h-5 w-1/3" />
                                 <Skeleton className="h-10 w-1/4" />
-                            </CardHeader>
+                             </CardHeader>
                         </Card>
                     ))}
                 </div>
             ) : filteredJobs.length > 0 ? (
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredJobs.map((job) => (
                     <JobCard key={job.id} job={job} hasApplied={appliedJobIds.has(job.id)} />
                 ))}
                 </div>
             ) : (
-                <div className="text-center py-16">
-                <p className="text-lg font-semibold">No jobs found</p>
-                <p className="text-muted-foreground">
+                <div className="text-center py-16 bg-card rounded-lg">
+                <p className="text-xl font-semibold">No Jobs Found</p>
+                <p className="text-muted-foreground mt-2">
                     {searchTerm 
-                    ? "Try adjusting your search terms." 
+                    ? "Your search returned no results. Try adjusting your terms." 
                     : "There are currently no job openings. Please check back later."
                     }
                 </p>

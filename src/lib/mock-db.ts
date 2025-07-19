@@ -1,14 +1,73 @@
+
 import type { User, Company, Job, Application } from "./types";
 
 let users: User[] = [
     { id: 'admin-1', email: 'admin@joblink.local', password: 'password', role: 'admin', name: 'Admin User' },
+    { id: 'employee-1', email: 'employee@joblink.local', password: 'password', role: 'employee', name: 'John Doe' },
+    { id: 'company-contact-1', email: 'contact@innovate.com', password: 'password', role: 'company', companyId: 'company-1', name: 'Jane Smith' },
+     { id: 'company-contact-2', email: 'hr@marketminds.io', password: 'password', role: 'company', companyId: 'company-2', name: 'Carlos Ray' },
 ];
 
-let companies: Company[] = [];
+let companies: Company[] = [
+    { id: 'company-1', name: 'InnovateTech', userId: 'company-contact-1', status: 'approved' },
+    { id: 'company-2', name: 'MarketMinds', userId: 'company-contact-2', status: 'approved' },
+    { id: 'company-3', name: 'Creative Solutions', userId: 'new-user-id', status: 'pending' },
+];
 
-let jobs: Job[] = [];
+let jobs: Job[] = [
+    {
+        id: 'job-1',
+        companyId: 'company-1',
+        companyName: 'InnovateTech',
+        title: 'Senior Frontend Developer',
+        description: 'We are looking for an experienced Frontend Developer to join our team. The ideal candidate will be responsible for building the next generation of our user interface, working with a team of talented engineers.',
+        keywords: ['React', 'TypeScript', 'Next.js', 'TailwindCSS', 'UI/UX'],
+        location: 'San Francisco, CA',
+        createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2, // 2 days ago
+    },
+    {
+        id: 'job-2',
+        companyId: 'company-2',
+        companyName: 'MarketMinds',
+        title: 'Product Marketing Manager',
+        description: 'MarketMinds is seeking a Product Marketing Manager to lead our go-to-market strategy. You will be responsible for product positioning, messaging, and sales enablement.',
+        keywords: ['SaaS', 'Marketing', 'Growth', 'B2B', 'Strategy'],
+        location: 'New York, NY',
+        createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5, // 5 days ago
+    },
+    {
+        id: 'job-3',
+        companyId: 'company-1',
+        companyName: 'InnovateTech',
+        title: 'Cloud Solutions Architect',
+        description: 'Design and implement scalable, high-performance cloud infrastructure. Must have deep experience with AWS or Google Cloud Platform and a passion for automation.',
+        keywords: ['AWS', 'GCP', 'Terraform', 'Kubernetes', 'DevOps'],
+        location: 'Remote',
+        createdAt: Date.now() - 1000 * 60 * 60 * 24 * 10, // 10 days ago
+    },
+     {
+        id: 'job-4',
+        companyId: 'company-2',
+        companyName: 'MarketMinds',
+        title: 'Data Scientist',
+        description: 'Analyze large, complex data sets to drive business decisions. Proficiency in Python, R, SQL, and machine learning frameworks is required.',
+        keywords: ['Python', 'Machine Learning', 'SQL', 'Data Analysis', 'Statistics'],
+        location: 'New York, NY',
+        createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1, // 1 day ago
+    }
+];
 
-let applications: Application[] = [];
+let applications: Application[] = [
+    {
+        id: 'app-1',
+        jobId: 'job-2',
+        jobTitle: 'Product Marketing Manager',
+        companyName: 'MarketMinds',
+        employeeId: 'employee-1',
+        employeeName: 'John Doe',
+        appliedAt: Date.now() - 1000 * 60 * 60 * 24, // 1 day ago
+    }
+];
 
 const generateId = () => Math.random().toString(36).substring(2, 9);
 
@@ -97,6 +156,10 @@ export const getJobs = (): Job[] => {
     return jobs.filter(j => approvedCompanyIds.has(j.companyId)).sort((a,b) => b.createdAt - a.createdAt);
 }
 
+export const getJobById = (jobId: string): Job | null => {
+    return jobs.find(j => j.id === jobId) || null;
+}
+
 export const getJobsByCompany = (companyId: string): Job[] => {
     return jobs.filter(j => j.companyId === companyId).sort((a,b) => b.createdAt - a.createdAt);
 }
@@ -133,5 +196,5 @@ export const getApplicationsForEmployee = (employeeId: string): Application[] =>
 
 export const getApplicationsForCompany = (companyId: string): Application[] => {
     const companyJobs = new Set(jobs.filter(j => j.companyId === companyId).map(j => j.id));
-    return applications.filter(a => companyJobs.has(a.jobId)).sort((a,b) => b.appliedAt - a.appliedAt);
+    return applications.filter(a => companyJobs.has(a.jobId)).sort((a,b) => b.createdAt - a.createdAt);
 }
