@@ -28,12 +28,15 @@ export default function Home() {
           <p className="max-w-3xl mx-auto text-lg text-muted-foreground mb-8">
             JobLink Local connects talented professionals with innovative companies in their area. Powered by AI to help you find the perfect match.
           </p>
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
-              <Link href="/employee/dashboard">Browse Jobs</Link>
+              <Link href="/employee/dashboard">Employee Dashboard</Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="/company/dashboard">Post a Job</Link>
+              <Link href="/company/dashboard">Company Dashboard</Link>
+            </Button>
+             <Button size="lg" variant="outline" asChild>
+              <Link href="/admin/dashboard">Admin Dashboard</Link>
             </Button>
           </div>
         </section>
