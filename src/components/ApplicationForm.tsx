@@ -90,10 +90,12 @@ export function ApplicationForm({ job, user }: ApplicationFormProps) {
     const nextStep = async () => {
         let isValid = false;
         if (currentStep === 0) isValid = await triggerValidation(['fullName', 'email', 'phone']);
-        if (currentStep === 1) isValid = await triggerValidation(['education']);
-        if (currentStep === 2) isValid = await triggerValidation(['experience']);
+        else if (currentStep === 1) isValid = await triggerValidation(['education']);
+        else if (currentStep === 2) isValid = await triggerValidation(['experience']);
+        else if (currentStep === 3) isValid = true;
 
-        if (isValid || currentStep === 3) {
+
+        if (isValid) {
             if (currentStep < steps.length - 1) {
                 setCurrentStep(prev => prev + 1);
             }
@@ -183,7 +185,7 @@ export function ApplicationForm({ job, user }: ApplicationFormProps) {
                                            <FormItem><FormLabel>Job Title</FormLabel><FormControl><Input placeholder="e.g., Software Engineer" {...field} /></FormControl><FormMessage /></FormItem>
                                        )} />
                                         <FormField control={form.control} name={`experience.${index}.company`} render={({ field }) => (
-                                           <FormItem><FormLabel>Company</FormLabel><FormControl><Input placeholder="e.g., Google" {...field} /></FormControl><FormMessage /></FormMessage>
+                                           <FormItem><FormLabel>Company</FormLabel><FormControl><Input placeholder="e.g., Google" {...field} /></FormControl><FormMessage /></FormItem>
                                        )} />
                                        <div className="grid grid-cols-2 gap-4">
                                             <FormField control={form.control} name={`experience.${index}.startDate`} render={({ field }) => (
@@ -240,7 +242,7 @@ export function ApplicationForm({ job, user }: ApplicationFormProps) {
                         )}
                     </CardContent>
                     <CardFooter className="flex justify-between">
-                        {currentStep > 0 && <Button type="button" variant="outline" onClick={prevStep}><ArrowLeft className="mr-2 h-4 w-4" />Back</Button>}
+                        {currentStep > 0 ? <Button type="button" variant="outline" onClick={prevStep}><ArrowLeft className="mr-2 h-4 w-4" />Back</Button> : <div></div>}
                         {currentStep < steps.length - 1 && <Button type="button" onClick={nextStep}>Next <ArrowRight className="ml-2 h-4 w-4" /></Button>}
                         {currentStep === steps.length - 1 && <Button type="submit" disabled={isLoading}>{isLoading ? "Submitting..." : "Submit Application"}</Button>}
                     </CardFooter>
