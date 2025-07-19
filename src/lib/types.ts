@@ -51,6 +51,7 @@ export interface ApplicationData {
     education: Education[];
     experience?: Experience[];
     resumeUrl?: string;
+    profileImageUrl?: string;
 }
 
 export interface Application {

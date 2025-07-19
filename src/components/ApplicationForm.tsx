@@ -15,7 +15,7 @@ import { useToast } from '@/hooks/use-toast';
 import { applyForJob } from '@/lib/mock-db';
 import type { Job, User } from '@/lib/types';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, ArrowRight, PlusCircle, Trash2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, PlusCircle, Trash2, Upload } from 'lucide-react';
 
 const educationSchema = z.object({
     degree: z.string().min(2, "Degree is required."),
@@ -37,7 +37,8 @@ const applicationSchema = z.object({
     phone: z.string().min(10, "A valid phone number is required."),
     education: z.array(educationSchema).min(1, "At least one education entry is required."),
     experience: z.array(experienceSchema).optional(),
-    resumeUrl: z.string().optional(), // In a real app, this would be a file upload
+    resumeUrl: z.string().optional(),
+    profileImageUrl: z.string().optional(),
 });
 
 type ApplicationFormValues = z.infer<typeof applicationSchema>;
@@ -51,6 +52,7 @@ const steps = [
     { id: 'personal', title: 'Personal Information' },
     { id: 'education', title: 'Education' },
     { id: 'experience', title: 'Work Experience' },
+    { id: 'uploads', title: 'Upload Documents' },
     { id: 'review', title: 'Review & Submit' },
 ];
 
@@ -68,6 +70,8 @@ export function ApplicationForm({ job, user }: ApplicationFormProps) {
             phone: '',
             education: [{ degree: '', institution: '', graduationYear: '' }],
             experience: [],
+            resumeUrl: '',
+            profileImageUrl: '',
         },
     });
 
@@ -92,7 +96,8 @@ export function ApplicationForm({ job, user }: ApplicationFormProps) {
         if (currentStep === 0) isValid = await triggerValidation(['fullName', 'email', 'phone']);
         else if (currentStep === 1) isValid = await triggerValidation(['education']);
         else if (currentStep === 2) isValid = await triggerValidation(['experience']);
-        else if (currentStep === 3) isValid = true;
+        else if (currentStep === 3) isValid = true; // Uploads are optional
+        else if (currentStep === 4) isValid = true;
 
 
         if (isValid) {
@@ -206,6 +211,42 @@ export function ApplicationForm({ job, user }: ApplicationFormProps) {
                              </div>
                         )}
                         {currentStep === 3 && (
+                            <div className="space-y-6">
+                                <FormField
+                                    control={form.control}
+                                    name="resumeUrl"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Upload Resume</FormLabel>
+                                            <FormControl>
+                                                <div className="relative">
+                                                    <Upload className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                                                    <Input type="file" className="pl-10" onChange={(e) => field.onChange(e.target.files?.[0]?.name || '')} />
+                                                </div>
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="profileImageUrl"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Upload Profile Image</FormLabel>
+                                            <FormControl>
+                                                 <div className="relative">
+                                                    <Upload className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                                                    <Input type="file" className="pl-10" onChange={(e) => field.onChange(e.target.files?.[0]?.name || '')} />
+                                                </div>
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+                        )}
+                        {currentStep === 4 && (
                             <div className="space-y-6 prose prose-sm max-w-none">
                                 <h3 className="text-foreground">Review Your Application</h3>
                                 <p>Please review all the information carefully before submitting.</p>
@@ -238,6 +279,12 @@ export function ApplicationForm({ job, user }: ApplicationFormProps) {
                                         ))}
                                     </>
                                 )}
+
+                                <h4>Uploaded Documents</h4>
+                                <ul>
+                                    <li><strong>Resume:</strong> {form.getValues('resumeUrl') || 'Not provided'}</li>
+                                    <li><strong>Profile Image:</strong> {form.getValues('profileImageUrl') || 'Not provided'}</li>
+                                </ul>
                             </div>
                         )}
                     </CardContent>
