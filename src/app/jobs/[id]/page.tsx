@@ -16,6 +16,7 @@ import { Briefcase, MapPin, Clock, Building, CheckCircle, ExternalLink, ArrowRig
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 
 export default function JobDetailPage() {
@@ -59,7 +60,8 @@ export default function JobDetailPage() {
             <SiteHeader />
             <main className="flex-1 bg-secondary/50 py-16">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid lg:grid-cols-3 gap-8">
+                    <Breadcrumbs />
+                    <div className="grid lg:grid-cols-3 gap-8 mt-6">
                         <div className="lg:col-span-2">
                              <Skeleton className="h-10 w-3/4 mb-4" />
                              <Skeleton className="h-6 w-1/2 mb-8" />
@@ -99,7 +101,8 @@ export default function JobDetailPage() {
       <SiteHeader />
       <main className="flex-1 bg-secondary/50 py-12 md:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-3 gap-8">
+            <Breadcrumbs />
+            <div className="grid lg:grid-cols-3 gap-8 mt-6">
                 <div className="lg:col-span-2 space-y-8">
                     <Card>
                         <CardHeader>

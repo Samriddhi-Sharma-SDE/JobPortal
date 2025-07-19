@@ -2,6 +2,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import Link from "next/link";
 import Image from "next/image";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export default function AboutPage() {
   return (
@@ -9,7 +10,8 @@ export default function AboutPage() {
       <SiteHeader />
       <main className="flex-1 bg-secondary/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="max-w-4xl mx-auto">
+          <Breadcrumbs />
+          <div className="max-w-4xl mx-auto mt-6">
             <h1 className="text-4xl font-extrabold tracking-tight text-center mb-6">About Job Portal</h1>
             <p className="text-lg text-muted-foreground text-center mb-12">
               Connecting talent with opportunities. We believe the best jobs are right around the corner.

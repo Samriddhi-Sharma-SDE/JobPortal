@@ -13,6 +13,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export default function JobsPage() {
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -47,7 +48,8 @@ export default function JobsPage() {
       <SiteHeader />
        <main className="flex-1 bg-secondary/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div className="text-center mb-12">
+            <Breadcrumbs />
+            <div className="text-center mb-12 mt-6">
                 <h1 className="text-4xl font-extrabold tracking-tight">Find Your Next Job</h1>
                 <p className="mt-4 text-lg text-muted-foreground">Browse all available positions from companies in your area.</p>
             </div>

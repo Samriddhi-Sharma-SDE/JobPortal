@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Check } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 const tiers = [
     {
@@ -88,7 +89,8 @@ export default function PricingPage() {
       <SiteHeader />
       <main className="flex-1 bg-secondary/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="max-w-4xl mx-auto text-center">
+          <Breadcrumbs />
+          <div className="max-w-4xl mx-auto text-center mt-6">
             <h1 className="text-4xl font-extrabold tracking-tight mb-4">Simple, Transparent Pricing</h1>
             <p className="text-lg text-muted-foreground">
               Choose the plan that's right for you. Free for job seekers, powerful for companies.

@@ -13,6 +13,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Skeleton } from '@/components/ui/skeleton';
 import { Briefcase, MapPin } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export default function ApplyPage() {
     const { id } = useParams();
@@ -45,9 +46,12 @@ export default function ApplyPage() {
                 <SiteHeader />
                 <main className="flex-1 bg-secondary/50 py-16">
                     <div className="container mx-auto max-w-4xl px-4">
-                        <Skeleton className="h-8 w-1/2 mb-2" />
-                        <Skeleton className="h-4 w-1/4 mb-8" />
-                        <Skeleton className="h-96 w-full" />
+                        <Breadcrumbs />
+                        <div className="mt-6">
+                            <Skeleton className="h-8 w-1/2 mb-2" />
+                            <Skeleton className="h-4 w-1/4 mb-8" />
+                            <Skeleton className="h-96 w-full" />
+                        </div>
                     </div>
                 </main>
                 <SiteFooter />
@@ -81,7 +85,8 @@ export default function ApplyPage() {
             <SiteHeader />
             <main className="flex-1 bg-secondary/50 py-12 md:py-16">
                 <div className="container mx-auto max-w-4xl px-4">
-                    <Card className="mb-8">
+                     <Breadcrumbs />
+                    <Card className="my-6">
                         <CardHeader>
                             <CardTitle className="text-2xl">Applying for: {job.title}</CardTitle>
                              <CardDescription className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm pt-1">

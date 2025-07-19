@@ -21,6 +21,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
 import Image from "next/image";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -56,7 +57,8 @@ export default function ContactPage() {
       <SiteHeader />
       <main className="flex-1 bg-secondary/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center mb-12">
+          <Breadcrumbs />
+          <div className="text-center mb-12 mt-6">
             <h1 className="text-4xl font-extrabold tracking-tight">Get in Touch</h1>
             <p className="mt-4 text-lg text-muted-foreground">We'd love to hear from you. Here's how you can reach us.</p>
           </div>

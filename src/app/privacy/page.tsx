@@ -1,6 +1,7 @@
 
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export default function PrivacyPage() {
   return (
@@ -8,7 +9,8 @@ export default function PrivacyPage() {
       <SiteHeader />
       <main className="flex-1 bg-secondary/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="prose prose-lg max-w-4xl mx-auto bg-card p-8 rounded-lg shadow-md">
+          <Breadcrumbs />
+          <div className="prose prose-lg max-w-4xl mx-auto bg-card p-8 rounded-lg shadow-md mt-6">
             <h1>Privacy Policy</h1>
             <p className="lead text-muted-foreground">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
             
