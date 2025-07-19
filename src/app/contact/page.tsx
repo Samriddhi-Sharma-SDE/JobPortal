@@ -74,7 +74,7 @@ export default function ContactPage() {
                   </div>
                   <div className="flex items-center gap-4">
                     <Mail className="w-5 h-5 text-primary" />
-                    <span>contact@joblink.local</span>
+                    <span>contact@jobportal.local</span>
                   </div>
                   <div className="flex items-start gap-4">
                     <MapPin className="w-5 h-5 text-primary mt-1" />

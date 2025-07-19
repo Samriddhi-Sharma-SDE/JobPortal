@@ -10,9 +10,9 @@ export default function AboutPage() {
       <main className="flex-1 bg-secondary/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl font-extrabold tracking-tight text-center mb-6">About JobLink Local</h1>
+            <h1 className="text-4xl font-extrabold tracking-tight text-center mb-6">About Job Portal</h1>
             <p className="text-lg text-muted-foreground text-center mb-12">
-              Connecting local talent with local opportunities. We believe the best jobs are right in your neighborhood.
+              Connecting talent with opportunities. We believe the best jobs are right around the corner.
             </p>
 
             <div className="grid md:grid-cols-2 gap-12 items-center mb-16">

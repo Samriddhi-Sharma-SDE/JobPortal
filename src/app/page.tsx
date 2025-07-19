@@ -36,7 +36,7 @@ const featuredJobs = [
 
 const testimonials = [
   {
-    quote: "JobLink Local was a game-changer for our recruitment process. The AI keyword suggestions helped us reach the right talent faster than ever before.",
+    quote: "Job Portal was a game-changer for our recruitment process. The AI keyword suggestions helped us reach the right talent faster than ever before.",
     name: "Sarah Johnson",
     role: "HR Manager, InnovateTech",
     avatar: "https://placehold.co/100x100.png",
@@ -50,7 +50,7 @@ const testimonials = [
     hint: "man portrait"
   },
    {
-    quote: "The quality of candidates we found through JobLink Local was outstanding. It's now our go-to platform for hiring in the region.",
+    quote: "The quality of candidates we found through Job Portal was outstanding. It's now our go-to platform for hiring in the region.",
     name: "Emily Rodriguez",
     role: "Founder, Creative Solutions",
     avatar: "https://placehold.co/100x100.png",
@@ -66,7 +66,7 @@ export default function Home() {
         <section className="container mx-auto px-4 sm:px-6 lg:px-8 text-center py-24 md:py-32">
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 font-headline">Find Your Next Opportunity, Locally.</h1>
           <p className="max-w-3xl mx-auto text-lg md:text-xl text-muted-foreground mb-8">
-            JobLink Local connects talented professionals with innovative companies in their area. Powered by AI to help you find the perfect match.
+            Job Portal connects talented professionals with innovative companies in their area. Powered by AI to help you find the perfect match.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>

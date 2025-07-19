@@ -10,7 +10,7 @@ export function SiteHeader() {
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <Link href="/" className="flex items-center gap-2 mr-6">
           <Briefcase className="w-6 h-6 text-primary" />
-          <span className="font-bold">JobLink Local</span>
+          <span className="font-bold">Job Portal</span>
         </Link>
         <nav className="hidden md:flex items-center gap-4 text-sm">
             <Link href="/jobs" className="text-muted-foreground transition-colors hover:text-foreground">Jobs</Link>

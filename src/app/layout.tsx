@@ -11,8 +11,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'JobLink Local',
-  description: 'A local job portal with AI-powered keyword suggestions.',
+  title: 'Job Portal',
+  description: 'A job portal with AI-powered keyword suggestions.',
 };
 
 export default function RootLayout({

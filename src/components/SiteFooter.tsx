@@ -11,7 +11,7 @@ export function SiteFooter() {
             <div className="flex flex-col gap-4">
                 <Link href="/" className="flex items-center gap-2">
                     <Briefcase className="w-6 h-6 text-primary" />
-                    <h1 className="text-lg font-bold">JobLink Local</h1>
+                    <h1 className="text-lg font-bold">Job Portal</h1>
                 </Link>
                 <p className="text-sm text-muted-foreground">Connecting local talent with local opportunities.</p>
             </div>
@@ -37,7 +37,7 @@ export function SiteFooter() {
              </div>
           </div>
           <Separator className="my-8" />
-          <p className="text-center text-sm text-muted-foreground">© {new Date().getFullYear()} JobLink Local. All Rights Reserved.</p>
+          <p className="text-center text-sm text-muted-foreground">© {new Date().getFullYear()} Job Portal. All Rights Reserved.</p>
         </div>
       </footer>
     )

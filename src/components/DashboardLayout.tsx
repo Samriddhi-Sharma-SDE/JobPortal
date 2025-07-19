@@ -46,7 +46,7 @@ export function DashboardLayout({ children, navItems, title }: DashboardLayoutPr
         <SidebarHeader>
           <div className="flex items-center gap-2">
             <Briefcase className="w-6 h-6 text-primary" />
-            <h1 className="text-xl font-semibold tracking-tight">JobLink Local</h1>
+            <h1 className="text-xl font-semibold tracking-tight">Job Portal</h1>
           </div>
         </SidebarHeader>
         <SidebarContent>
