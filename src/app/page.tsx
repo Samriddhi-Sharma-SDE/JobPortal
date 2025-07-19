@@ -1,13 +1,17 @@
 
+"use client";
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Building2, User, UserCheck, Zap, Users, Heart, Star, Briefcase, Search, CheckCircle } from "lucide-react";
+import { Building2, User, UserCheck, Zap, Users, Heart, Star, Briefcase, Search, CheckCircle, Code, Megaphone, BarChartHorizontal } from "lucide-react";
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 const featuredJobs = [
   {
@@ -67,12 +71,27 @@ const stats = [
     { number: "98%", label: "Satisfaction Rate", icon: <Heart /> },
 ]
 
+const FloatingIcon = ({ icon, className }: { icon: React.ReactNode, className: string }) => (
+    <div className={`absolute bg-card p-3 rounded-full shadow-lg border animate-float ${className}`}>
+        {icon}
+    </div>
+)
+
 export default function Home() {
+    const router = useRouter();
+    
+    const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        const searchQuery = formData.get('search') as string;
+        router.push(`/jobs?search=${encodeURIComponent(searchQuery)}`);
+    }
+
   return (
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
       <main className="flex-1">
-        <section className="relative h-screen flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <section className="relative min-h-[90vh] flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 overflow-hidden">
           <div 
             className="absolute inset-0 bg-background -z-10"
             style={{
@@ -80,20 +99,40 @@ export default function Home() {
                 'radial-gradient(circle at 50% 50%, hsla(var(--primary) / 0.1), transparent 60%)',
             }}
           />
-           <div className="absolute -top-32 -left-32 -z-10 h-96 w-96 bg-primary/10 rounded-full blur-3xl" />
-           <div className="absolute -bottom-32 -right-32 -z-10 h-96 w-96 bg-accent/10 rounded-full blur-3xl" />
-          <div className="relative">
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 font-headline">Find Your Next Opportunity, Locally.</h1>
+           <div className="absolute -top-32 -left-32 -z-10 h-96 w-96 bg-primary/5 rounded-full blur-3xl" />
+           <div className="absolute -bottom-32 -right-32 -z-10 h-96 w-96 bg-accent/5 rounded-full blur-3xl" />
+
+            <FloatingIcon icon={<Code className="w-6 h-6 text-primary" />} className="top-[15%] left-[10%] hidden lg:block" />
+            <FloatingIcon icon={<Megaphone className="w-6 h-6 text-accent" />} className="top-[25%] right-[12%] hidden lg:block" />
+            <FloatingIcon icon={<BarChartHorizontal className="w-6 h-6 text-green-500" />} className="bottom-[20%] left-[20%] hidden lg:block" />
+            <FloatingIcon icon={<Briefcase className="w-6 h-6 text-yellow-500" />} className="bottom-[15%] right-[18%] hidden lg:block" />
+
+          <div className="relative z-10 w-full">
+            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter mb-4">Find Your Next Opportunity, Locally.</h1>
             <p className="max-w-3xl mx-auto text-lg md:text-xl text-muted-foreground mb-8">
               Job Portal connects talented professionals with innovative companies in their area. Powered by AI to help you find the perfect match.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" asChild>
-                <Link href="/jobs">Find a Job</Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link href="/register?role=company">Post a Job</Link>
-              </Button>
+            
+            <form onSubmit={handleSearch} className="relative w-full max-w-2xl mx-auto mb-8">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <Input
+                    name="search"
+                    placeholder="Job title, keyword, or company"
+                    className="pl-12 pr-24 h-14 text-base rounded-full shadow-lg"
+                />
+                <Button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2 h-10 rounded-full px-6">
+                    Search
+                </Button>
+            </form>
+
+            <div className="text-center">
+                <p className="text-sm text-muted-foreground">Trusted by top local companies</p>
+                <div className="flex justify-center items-center gap-8 mt-4">
+                    <span className="font-semibold text-muted-foreground/80">InnovateTech</span>
+                     <span className="font-semibold text-muted-foreground/80">MarketMinds</span>
+                     <span className="font-semibold text-muted-foreground/80">DataNexus AI</span>
+                     <span className="font-semibold text-muted-foreground/80">HealthWell</span>
+                </div>
             </div>
           </div>
         </section>
@@ -115,7 +154,7 @@ export default function Home() {
         <section className="py-20 md:py-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold font-headline">How It Works</h2>
+              <h2 className="text-3xl font-bold">How It Works</h2>
               <p className="text-muted-foreground">A simple process for every user.</p>
             </div>
             <div className="grid md:grid-cols-3 gap-8">
@@ -124,7 +163,7 @@ export default function Home() {
                   <div className="mx-auto bg-primary/10 p-3 rounded-full w-fit">
                     <Building2 className="w-8 h-8 text-primary" />
                   </div>
-                  <CardTitle className="font-headline pt-4">For Companies</CardTitle>
+                  <CardTitle className="pt-4">For Companies</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
@@ -137,7 +176,7 @@ export default function Home() {
                    <div className="mx-auto bg-primary/10 p-3 rounded-full w-fit">
                     <User className="w-8 h-8 text-primary" />
                   </div>
-                  <CardTitle className="font-headline pt-4">For Employees</CardTitle>
+                  <CardTitle className="pt-4">For Employees</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
@@ -150,7 +189,7 @@ export default function Home() {
                    <div className="mx-auto bg-primary/10 p-3 rounded-full w-fit">
                     <UserCheck className="w-8 h-8 text-primary" />
                   </div>
-                  <CardTitle className="font-headline pt-4">For Admins</CardTitle>
+                  <CardTitle className="pt-4">For Admins</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
@@ -166,7 +205,7 @@ export default function Home() {
             <div className="absolute -left-48 -top-48 -z-10 h-96 w-96 bg-primary/5 rounded-full blur-3xl" />
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                  <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold font-headline">Featured Jobs</h2>
+                    <h2 className="text-3xl font-bold">Featured Jobs</h2>
                     <p className="text-muted-foreground">Check out these hot opportunities from top local companies.</p>
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -202,7 +241,7 @@ export default function Home() {
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div>
                         <Badge variant="default" className="mb-4 bg-green-500 hover:bg-green-600">Why Choose Us</Badge>
-                        <h2 className="text-3xl font-bold font-headline mb-4">The Smarter Way to Hire and Get Hired</h2>
+                        <h2 className="text-3xl font-bold mb-4">The Smarter Way to Hire and Get Hired</h2>
                         <p className="text-muted-foreground mb-6">We're not just another job board. We're a dedicated platform for local communities, enhanced with cutting-edge technology to make connections that matter.</p>
                         <ul className="space-y-4">
                             <li className="flex items-start gap-4">
@@ -244,7 +283,7 @@ export default function Home() {
              <div className="absolute -right-48 -bottom-48 -z-10 h-96 w-96 bg-accent/5 rounded-full blur-3xl" />
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold font-headline">Loved by Companies and Candidates</h2>
+                    <h2 className="text-3xl font-bold">Loved by Companies and Candidates</h2>
                     <p className="text-muted-foreground">Don't just take our word for it. Here's what people are saying.</p>
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -285,3 +324,5 @@ export default function Home() {
     </div>
   );
 }
+
+    

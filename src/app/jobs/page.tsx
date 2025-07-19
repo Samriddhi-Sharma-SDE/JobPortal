@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -14,12 +15,16 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { useSearchParams } from 'next/navigation'
 
 export default function JobsPage() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [applications, setApplications] = useState<Application[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
+  
+  const searchParams = useSearchParams()
+  const initialSearch = searchParams.get('search') || '';
+  const [searchTerm, setSearchTerm] = useState(initialSearch);
 
   useEffect(() => {
     setIsLoading(true);
@@ -33,11 +38,13 @@ export default function JobsPage() {
   }, []);
 
   const filteredJobs = useMemo(() => {
+    if (!searchTerm) return jobs;
+    const lowercasedTerm = searchTerm.toLowerCase();
     return jobs.filter(job => 
-      job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      job.companyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      job.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      job.keywords.some(kw => kw.toLowerCase().includes(searchTerm.toLowerCase()))
+      job.title.toLowerCase().includes(lowercasedTerm) ||
+      job.companyName.toLowerCase().includes(lowercasedTerm) ||
+      job.location.toLowerCase().includes(lowercasedTerm) ||
+      job.keywords.some(kw => kw.toLowerCase().includes(lowercasedTerm))
     );
   }, [jobs, searchTerm]);
   
@@ -49,7 +56,7 @@ export default function JobsPage() {
        <main className="flex-1 bg-secondary/50">
         <div className="relative overflow-hidden">
             <div 
-                className="absolute inset-0 -z-10"
+                className="absolute inset-0 -z-10 bg-background"
                 style={{
                 backgroundImage:
                     'radial-gradient(circle at top, hsla(var(--primary) / 0.1), transparent 40%)',
@@ -118,3 +125,5 @@ export default function JobsPage() {
     </div>
   );
 }
+
+    
