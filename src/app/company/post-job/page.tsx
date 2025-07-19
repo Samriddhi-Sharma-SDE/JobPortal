@@ -1,3 +1,4 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -33,8 +34,10 @@ const companyNavItems: NavItem[] = [
 const formSchema = z.object({
   title: z.string().min(5, { message: "Job title must be at least 5 characters." }),
   description: z.string().min(50, { message: "Description must be at least 50 characters." }),
-  keywords: z.array(z.string()).min(1, { message: "Please add at least one keyword." }),
+  keywords: z.array(z.object({ value: z.string() })).min(1, { message: "Please add at least one keyword." }),
 });
+
+type PostJobFormValues = z.infer<typeof formSchema>;
 
 export default function PostJobPage() {
   const { user, isLoading: authLoading } = useAuth();
@@ -42,7 +45,7 @@ export default function PostJobPage() {
   const { toast } = useToast();
   const [keywordInput, setKeywordInput] = useState("");
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<PostJobFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
@@ -58,12 +61,12 @@ export default function PostJobPage() {
 
   const handleAddKeyword = () => {
     if (keywordInput.trim() !== "" && !fields.some(field => field.value === keywordInput.trim())) {
-      append(keywordInput.trim());
+      append({ value: keywordInput.trim() });
       setKeywordInput("");
     }
   };
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: PostJobFormValues) {
     // Mock companyId when not logged in
     const companyId = user?.companyId || 'company-1'; 
     if (!companyId) {
@@ -71,7 +74,11 @@ export default function PostJobPage() {
         return;
     }
     try {
-      addJob({ ...values, companyId: companyId });
+      addJob({ 
+        ...values, 
+        keywords: values.keywords.map(kw => kw.value),
+        companyId: companyId 
+      });
       toast({
         title: "Job Posted Successfully",
         description: `Your new role "${values.title}" is now live.`,
@@ -173,3 +180,4 @@ export default function PostJobPage() {
     </DashboardLayout>
   );
 }
+
