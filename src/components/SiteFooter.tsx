@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import { Separator } from "./ui/separator";
 import { Briefcase } from "lucide-react";
@@ -30,6 +31,7 @@ export function SiteFooter() {
                  <h4 className="font-semibold">Company</h4>
                  <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground">About Us</Link>
                  <Link href="/contact" className="text-sm text-muted-foreground hover:text-foreground">Contact</Link>
+                 <Link href="/feedback" className="text-sm text-muted-foreground hover:text-foreground">Feedback</Link>
                  <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground">Terms of Service</Link>
                  <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground">Privacy Policy</Link>
              </div>
