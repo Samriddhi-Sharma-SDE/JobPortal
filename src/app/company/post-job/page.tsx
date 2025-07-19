@@ -34,6 +34,7 @@ const companyNavItems: NavItem[] = [
 const formSchema = z.object({
   title: z.string().min(5, { message: "Job title must be at least 5 characters." }),
   description: z.string().min(50, { message: "Description must be at least 50 characters." }),
+  location: z.string().min(2, { message: "Location is required." }),
   keywords: z.array(z.object({ value: z.string() })).min(1, { message: "Please add at least one keyword." }),
 });
 
@@ -50,6 +51,7 @@ export default function PostJobPage() {
     defaultValues: {
       title: "",
       description: "",
+      location: "",
       keywords: [],
     },
   });
@@ -137,6 +139,22 @@ export default function PostJobPage() {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="location"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Location</FormLabel>
+                    <FormControl>
+                      <Input placeholder="e.g., San Francisco, CA or Remote" {...field} />
+                    </FormControl>
+                     <FormDescription>
+                        Specify the city and state, or "Remote".
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               
               <div>
                 <FormLabel>Keywords</FormLabel>
@@ -180,4 +198,3 @@ export default function PostJobPage() {
     </DashboardLayout>
   );
 }
-

@@ -3,7 +3,7 @@
 
 import { Suspense } from 'react';
 import { Button } from "@/components/ui/button";
-import { Briefcase, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { JobCard } from "@/components/JobCard";
