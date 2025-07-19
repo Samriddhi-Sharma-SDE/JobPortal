@@ -63,25 +63,27 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
       <main className="flex-1">
-        <section className="container mx-auto px-4 sm:px-6 lg:px-8 text-center py-24 md:py-32">
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 font-headline">Find Your Next Opportunity, Locally.</h1>
-          <p className="max-w-3xl mx-auto text-lg md:text-xl text-muted-foreground mb-8">
-            Job Portal connects talented professionals with innovative companies in their area. Powered by AI to help you find the perfect match.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button size="lg" asChild>
-              <Link href="/jobs">Find a Job</Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link href="/company/post-job">Post a Job</Link>
-            </Button>
-          </div>
-           <div className="mt-12 flex flex-col items-center gap-4">
-            <p className="font-semibold text-sm">Or, go directly to your dashboard:</p>
-            <div className="flex gap-4">
-              <Button variant="secondary" size="sm" asChild><Link href="/employee/dashboard">Employee</Link></Button>
-              <Button variant="secondary" size="sm" asChild><Link href="/company/dashboard">Company</Link></Button>
-              <Button variant="secondary" size="sm" asChild><Link href="/admin/dashboard">Admin</Link></Button>
+        <section className="relative h-screen flex items-center justify-center text-center px-4 sm:px-6 lg:px-8">
+          <div 
+            className="absolute inset-0 bg-secondary/50 -z-10"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 50% 50%, hsla(var(--primary) / 0.1), transparent 60%)',
+            }}
+          />
+           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-64 w-64 bg-primary/10 rounded-full blur-3xl" />
+          <div className="relative">
+            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 font-headline">Find Your Next Opportunity, Locally.</h1>
+            <p className="max-w-3xl mx-auto text-lg md:text-xl text-muted-foreground mb-8">
+              Job Portal connects talented professionals with innovative companies in their area. Powered by AI to help you find the perfect match.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button size="lg" asChild>
+                <Link href="/jobs">Find a Job</Link>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <Link href="/register?role=company">Post a Job</Link>
+              </Button>
             </div>
           </div>
         </section>
