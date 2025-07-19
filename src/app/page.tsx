@@ -1,6 +1,8 @@
+
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Building2, User, UserCheck, Zap, Users, Heart, Star } from "lucide-react";
+import { Building2, User, UserCheck, Zap, Users, Heart, Star, Briefcase, Search, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -58,6 +60,13 @@ const testimonials = [
   },
 ]
 
+const stats = [
+    { number: "1,200+", label: "Jobs Posted", icon: <Briefcase /> },
+    { number: "500+", label: "Companies Registered", icon: <Building2 /> },
+    { number: "5,000+", label: "Successful Hires", icon: <UserCheck /> },
+    { number: "98%", label: "Satisfaction Rate", icon: <Heart /> },
+]
+
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -88,8 +97,22 @@ export default function Home() {
             </div>
           </div>
         </section>
-
+        
         <section className="bg-secondary/50 py-20 md:py-24">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    {stats.map((stat, index) => (
+                        <div key={index} className="flex flex-col items-center">
+                           <div className="text-primary mb-2">{React.cloneElement(stat.icon, { className: "w-10 h-10" })}</div>
+                           <p className="text-3xl md:text-4xl font-bold text-foreground">{stat.number}</p>
+                           <p className="text-sm text-muted-foreground">{stat.label}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <section className="py-20 md:py-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold font-headline">How It Works</h2>
@@ -139,7 +162,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="py-20 md:py-24 relative overflow-hidden">
+        <section className="py-20 md:py-24 relative overflow-hidden bg-secondary/50">
             <div className="absolute -left-48 -top-48 -z-10 h-96 w-96 bg-primary/5 rounded-full blur-3xl" />
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                  <div className="text-center mb-12">
@@ -148,7 +171,7 @@ export default function Home() {
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {featuredJobs.map((job, index) => (
-                        <Card key={index} className="flex flex-col transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl bg-card/80 backdrop-blur-sm">
+                        <Card key={index} className="flex flex-col transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl bg-card">
                             <CardHeader>
                                 <CardTitle>{job.title}</CardTitle>
                                 <CardDescription>{job.company} - {job.location}</CardDescription>
@@ -174,7 +197,7 @@ export default function Home() {
             </div>
         </section>
 
-        <section className="bg-secondary/50 py-20 md:py-24">
+        <section className="py-20 md:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div>
@@ -217,7 +240,7 @@ export default function Home() {
             </div>
         </section>
         
-        <section className="py-20 md:py-24 relative overflow-hidden">
+        <section className="bg-secondary/50 py-20 md:py-24 relative overflow-hidden">
              <div className="absolute -right-48 -bottom-48 -z-10 h-96 w-96 bg-accent/5 rounded-full blur-3xl" />
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
@@ -226,7 +249,7 @@ export default function Home() {
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {testimonials.map((testimonial, index) => (
-                        <Card key={index} className="flex flex-col justify-between bg-card/80 backdrop-blur-sm border-0 shadow-lg">
+                        <Card key={index} className="flex flex-col justify-between bg-card border-0 shadow-lg">
                             <CardContent className="pt-6">
                                 <div className="flex gap-0.5 text-yellow-500 mb-2">
                                   <Star className="w-5 h-5 fill-current" />
