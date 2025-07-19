@@ -1,9 +1,18 @@
 
+"use client";
+
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { useEffect, useState } from "react";
 
 export default function TermsPage() {
+    const [lastUpdated, setLastUpdated] = useState('');
+
+    useEffect(() => {
+        setLastUpdated(new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }));
+    }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
@@ -12,7 +21,7 @@ export default function TermsPage() {
           <Breadcrumbs />
           <div className="prose prose-lg max-w-4xl mx-auto bg-card p-8 rounded-lg shadow-md mt-6">
             <h1>Terms of Service</h1>
-            <p className="lead text-muted-foreground">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+            {lastUpdated && <p className="lead text-muted-foreground">Last updated: {lastUpdated}</p>}
 
             <h2>1. Agreement to Terms</h2>
             <p>By using our services ("Service"), you agree to be bound by these Terms of Service. If you disagree with any part of the terms, then you do not have permission to access the Service. These Terms apply to all visitors, users, and others who access or use the Service.</p>

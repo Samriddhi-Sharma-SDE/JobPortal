@@ -1,9 +1,18 @@
 
+"use client";
+
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { useEffect, useState } from "react";
 
 export default function PrivacyPage() {
+  const [lastUpdated, setLastUpdated] = useState('');
+
+  useEffect(() => {
+    setLastUpdated(new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }));
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
@@ -12,7 +21,7 @@ export default function PrivacyPage() {
           <Breadcrumbs />
           <div className="prose prose-lg max-w-4xl mx-auto bg-card p-8 rounded-lg shadow-md mt-6">
             <h1>Privacy Policy</h1>
-            <p className="lead text-muted-foreground">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+            {lastUpdated && <p className="lead text-muted-foreground">Last updated: {lastUpdated}</p>}
             
             <p>Welcome to Job Portal. We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us.</p>
             
