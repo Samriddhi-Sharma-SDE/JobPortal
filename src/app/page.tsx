@@ -148,6 +148,46 @@ const companyPath = [
     }
 ]
 
+const Timeline = ({ path }: { path: typeof seekerPath | typeof companyPath }) => (
+  <div className="relative">
+    <div className="absolute left-1/2 top-0 h-full w-0.5 bg-border -translate-x-1/2"></div>
+    {path.map((step, index) => (
+      <div key={step.title} className="relative mb-12">
+        <div className="flex items-center">
+          <div className="w-1/2 pr-8 text-right">
+            {index % 2 === 0 && (
+              <Card className="inline-block text-left p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="flex justify-start items-center gap-4 mb-4">
+                    <div className="flex justify-center items-center bg-primary/10 rounded-full w-16 h-16">
+                        {step.icon}
+                    </div>
+                    <h3 className="text-xl font-semibold">{step.title}</h3>
+                </div>
+                <p className="text-muted-foreground text-sm">{step.description}</p>
+              </Card>
+            )}
+          </div>
+          <div className="absolute left-1/2 w-6 h-6 bg-primary rounded-full -translate-x-1/2 border-4 border-background"></div>
+          <div className="w-1/2 pl-8 text-left">
+            {index % 2 !== 0 && (
+              <Card className="inline-block p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="flex justify-start items-center gap-4 mb-4">
+                    <div className="flex justify-center items-center bg-primary/10 rounded-full w-16 h-16">
+                        {step.icon}
+                    </div>
+                    <h3 className="text-xl font-semibold">{step.title}</h3>
+                </div>
+                <p className="text-muted-foreground text-sm">{step.description}</p>
+              </Card>
+            )}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+
 export default function Home() {
     const router = useRouter();
     
@@ -237,31 +277,11 @@ export default function Home() {
                     <TabsTrigger value="job-seekers">For Job Seekers</TabsTrigger>
                     <TabsTrigger value="companies">For Companies</TabsTrigger>
                 </TabsList>
-                <TabsContent value="job-seekers">
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-                        {seekerPath.map((step) => (
-                            <Card key={step.title} className="text-center p-6 border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                                <div className="flex justify-center items-center mb-4 bg-primary/10 rounded-full w-16 h-16 mx-auto">
-                                    {step.icon}
-                                </div>
-                                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                                <p className="text-muted-foreground text-sm">{step.description}</p>
-                            </Card>
-                        ))}
-                    </div>
+                <TabsContent value="job-seekers" className="mt-12">
+                   <Timeline path={seekerPath} />
                 </TabsContent>
-                <TabsContent value="companies">
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-                        {companyPath.map((step) => (
-                            <Card key={step.title} className="text-center p-6 border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                                <div className="flex justify-center items-center mb-4 bg-primary/10 rounded-full w-16 h-16 mx-auto">
-                                    {step.icon}
-                                </div>
-                                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                                <p className="text-muted-foreground text-sm">{step.description}</p>
-                            </Card>
-                        ))}
-                    </div>
+                <TabsContent value="companies" className="mt-12">
+                   <Timeline path={companyPath} />
                 </TabsContent>
             </Tabs>
           </div>
@@ -402,3 +422,5 @@ export default function Home() {
     </div>
   );
 }
+
+    
