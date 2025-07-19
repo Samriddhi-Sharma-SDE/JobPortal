@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { getJobById, getApplicationsForEmployee } from "@/lib/mock-db";
+import { getJobById, getApplicationsForEmployee, getJobs } from "@/lib/mock-db";
 import type { Job } from "@/lib/types";
 import { useAuth } from "@/hooks/use-auth";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -18,6 +18,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
+export async function generateStaticParams() {
+    const jobs = getJobs();
+    return jobs.map((job) => ({
+        id: job.id,
+    }));
+}
 
 export default function JobDetailPage() {
   const { id } = useParams();

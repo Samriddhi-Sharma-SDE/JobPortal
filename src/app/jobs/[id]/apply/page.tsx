@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { getJobById } from '@/lib/mock-db';
+import { getJobById, getJobs } from '@/lib/mock-db';
 import type { Job } from '@/lib/types';
 import { useAuth } from '@/hooks/use-auth';
 import { SiteHeader } from '@/components/SiteHeader';
@@ -14,6 +14,13 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Briefcase, MapPin } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+
+export async function generateStaticParams() {
+    const jobs = getJobs();
+    return jobs.map((job) => ({
+        id: job.id,
+    }));
+}
 
 export default function ApplyPage() {
     const { id } = useParams();
