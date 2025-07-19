@@ -15,42 +15,42 @@ export default function AboutPage() {
               Connecting local talent with local opportunities. We believe the best jobs are right in your neighborhood.
             </p>
 
-            <div className="grid md:grid-cols-2 gap-8 items-center mb-12">
-                <div>
-                    <h2 className="text-3xl font-bold mb-4">Our Mission</h2>
-                    <p className="text-muted-foreground mb-4">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. 
+            <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div className="space-y-4">
+                    <h2 className="text-3xl font-bold">Our Mission</h2>
+                    <p className="text-muted-foreground">
+                        Our mission is to empower local economies by creating a seamless, efficient, and enjoyable connection between job seekers and employers. We strive to foster community growth and individual career development by making local opportunities more accessible than ever before.
                     </p>
                     <p className="text-muted-foreground">
-                        Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue.
+                        We are dedicated to building a platform that not only lists jobs but also understands the unique needs of local markets, helping businesses thrive and talent to flourish right where they live.
                     </p>
                 </div>
                  <Image
                     src="https://placehold.co/600x400.png"
-                    alt="Office team"
+                    alt="Team working together on a project"
                     width={600}
                     height={400}
-                    className="rounded-lg shadow-md"
-                    data-ai-hint="team office"
+                    className="rounded-lg shadow-lg"
+                    data-ai-hint="team collaboration"
                  />
             </div>
 
-             <div className="grid md:grid-cols-2 gap-8 items-center">
+             <div className="grid md:grid-cols-2 gap-12 items-center">
                  <Image
                     src="https://placehold.co/600x400.png"
-                    alt="Community"
+                    alt="A vibrant local community event"
                     width={600}
                     height={400}
-                    className="rounded-lg shadow-md md:order-last"
+                    className="rounded-lg shadow-lg md:order-last"
                     data-ai-hint="community event"
                  />
-                <div>
-                    <h2 className="text-3xl font-bold mb-4">Our Vision</h2>
-                    <p className="text-muted-foreground mb-4">
-                        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. 
+                <div className="space-y-4">
+                    <h2 className="text-3xl font-bold">Our Vision</h2>
+                    <p className="text-muted-foreground">
+                        We envision a future where every individual can find meaningful work within their own community, and every local business has access to the talent they need to succeed. We aim to be the digital heart of local employment, a trusted partner for both companies and professionals.
                     </p>
                      <p className="text-muted-foreground">
-                        Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt malesuada tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris.
+                       Through continuous innovation and a deep commitment to our users, we see a world where geographical barriers to employment are minimized, strengthening community ties and building a more prosperous future for all.
                     </p>
                 </div>
             </div>
