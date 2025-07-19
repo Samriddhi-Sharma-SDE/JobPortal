@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Briefcase, Building2, User, UserCheck, Zap, BarChart, Users, Heart } from "lucide-react";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Building2, User, UserCheck, Zap, Users, Heart, Star } from "lucide-react";
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -14,6 +14,7 @@ const featuredJobs = [
     location: "San Francisco, CA",
     type: "Full-time",
     tags: ["React", "TypeScript", "Next.js"],
+    href: "/jobs/job-1"
   },
   {
     title: "Product Marketing Manager",
@@ -21,13 +22,15 @@ const featuredJobs = [
     location: "New York, NY",
     type: "Remote",
     tags: ["SaaS", "Marketing", "Growth"],
+    href: "/jobs/job-2"
   },
   {
-    title: "UX/UI Designer",
-    company: "Creative Solutions",
+    title: "Cloud Solutions Architect",
+    company: "InnovateTech",
     location: "Austin, TX",
     type: "Contract",
-    tags: ["Figma", "User Research", "Prototyping"],
+    tags: ["AWS", "GCP", "DevOps"],
+    href: "/jobs/job-3"
   },
 ];
 
@@ -60,8 +63,8 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
       <main className="flex-1">
-        <section className="container mx-auto px-4 sm:px-6 lg:px-8 text-center py-20 md:py-32">
-          <h2 className="text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 font-headline">Find Your Next Opportunity, Locally.</h2>
+        <section className="container mx-auto px-4 sm:px-6 lg:px-8 text-center py-24 md:py-32">
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 font-headline">Find Your Next Opportunity, Locally.</h1>
           <p className="max-w-3xl mx-auto text-lg md:text-xl text-muted-foreground mb-8">
             JobLink Local connects talented professionals with innovative companies in their area. Powered by AI to help you find the perfect match.
           </p>
@@ -73,52 +76,60 @@ export default function Home() {
               <Link href="/company/post-job">Post a Job</Link>
             </Button>
           </div>
+           <div className="mt-12 flex flex-col items-center gap-4">
+            <p className="font-semibold text-sm">Or, go directly to your dashboard:</p>
+            <div className="flex gap-4">
+              <Button variant="secondary" size="sm" asChild><Link href="/employee/dashboard">Employee</Link></Button>
+              <Button variant="secondary" size="sm" asChild><Link href="/company/dashboard">Company</Link></Button>
+              <Button variant="secondary" size="sm" asChild><Link href="/admin/dashboard">Admin</Link></Button>
+            </div>
+          </div>
         </section>
 
-        <section className="bg-secondary py-20 md:py-24">
+        <section className="bg-secondary/50 py-20 md:py-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h3 className="text-3xl font-bold font-headline">How It Works</h3>
+              <h2 className="text-3xl font-bold font-headline">How It Works</h2>
               <p className="text-muted-foreground">A simple process for every user.</p>
             </div>
             <div className="grid md:grid-cols-3 gap-8">
-              <Card className="text-center">
+              <Card className="text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
                 <CardHeader>
                   <div className="mx-auto bg-primary/10 p-3 rounded-full w-fit">
                     <Building2 className="w-8 h-8 text-primary" />
                   </div>
-                  <CardTitle className="font-headline">For Companies</CardTitle>
+                  <CardTitle className="font-headline pt-4">For Companies</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>
+                  <p className="text-muted-foreground">
                     Register, get approved, and post jobs. Use our AI to suggest powerful keywords and attract top talent.
-                  </CardDescription>
+                  </p>
                 </CardContent>
               </Card>
-              <Card className="text-center">
+              <Card className="text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
                 <CardHeader>
                    <div className="mx-auto bg-primary/10 p-3 rounded-full w-fit">
                     <User className="w-8 h-8 text-primary" />
                   </div>
-                  <CardTitle className="font-headline">For Employees</CardTitle>
+                  <CardTitle className="font-headline pt-4">For Employees</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>
+                  <p className="text-muted-foreground">
                     Create a profile, browse local job opportunities, and apply with a single click. Your dream job is waiting.
-                  </CardDescription>
+                  </p>
                 </CardContent>
               </Card>
-              <Card className="text-center">
+              <Card className="text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
                 <CardHeader>
                    <div className="mx-auto bg-primary/10 p-3 rounded-full w-fit">
                     <UserCheck className="w-8 h-8 text-primary" />
                   </div>
-                  <CardTitle className="font-headline">For Admins</CardTitle>
+                  <CardTitle className="font-headline pt-4">For Admins</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>
+                  <p className="text-muted-foreground">
                     Maintain platform integrity by reviewing and approving new company registrations for a high-quality experience.
-                  </CardDescription>
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -128,12 +139,12 @@ export default function Home() {
         <section className="py-20 md:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                  <div className="text-center mb-12">
-                    <h3 className="text-3xl font-bold font-headline">Featured Jobs</h3>
+                    <h2 className="text-3xl font-bold font-headline">Featured Jobs</h2>
                     <p className="text-muted-foreground">Check out these hot opportunities from top local companies.</p>
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {featuredJobs.map((job, index) => (
-                        <Card key={index} className="flex flex-col">
+                        <Card key={index} className="flex flex-col transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl">
                             <CardHeader>
                                 <CardTitle>{job.title}</CardTitle>
                                 <CardDescription>{job.company} - {job.location}</CardDescription>
@@ -143,46 +154,48 @@ export default function Home() {
                                     {job.tags.map(tag => <Badge key={tag} variant="secondary">{tag}</Badge>)}
                                 </div>
                             </CardContent>
-                            <CardContent>
-                               <Button className="w-full">View Job</Button>
-                            </CardContent>
+                            <CardFooter>
+                               <Button asChild className="w-full">
+                                    <Link href={job.href}>View Job</Link>
+                               </Button>
+                            </CardFooter>
                         </Card>
                     ))}
                 </div>
                 <div className="text-center mt-12">
-                    <Button asChild variant="outline">
+                    <Button asChild variant="outline" size="lg">
                         <Link href="/jobs">View All Jobs</Link>
                     </Button>
                 </div>
             </div>
         </section>
 
-        <section className="bg-secondary py-20 md:py-24">
+        <section className="bg-secondary/50 py-20 md:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div>
-                        <Badge variant="default" className="mb-4">Why Choose Us</Badge>
-                        <h3 className="text-3xl font-bold font-headline mb-4">The Smarter Way to Hire and Get Hired</h3>
+                        <Badge variant="default" className="mb-4 bg-green-500 hover:bg-green-600">Why Choose Us</Badge>
+                        <h2 className="text-3xl font-bold font-headline mb-4">The Smarter Way to Hire and Get Hired</h2>
                         <p className="text-muted-foreground mb-6">We're not just another job board. We're a dedicated platform for local communities, enhanced with cutting-edge technology to make connections that matter.</p>
                         <ul className="space-y-4">
                             <li className="flex items-start gap-4">
-                                <Zap className="w-6 h-6 text-primary mt-1 shrink-0" />
+                                <div className="p-2 bg-primary/10 rounded-full"><Zap className="w-5 h-5 text-primary" /></div>
                                 <div>
-                                    <h4 className="font-semibold">AI-Powered Matching</h4>
+                                    <h3 className="font-semibold">AI-Powered Matching</h3>
                                     <p className="text-muted-foreground text-sm">Our smart algorithms help companies find the right candidates and job seekers discover their perfect role.</p>
                                 </div>
                             </li>
                             <li className="flex items-start gap-4">
-                                <Users className="w-6 h-6 text-primary mt-1 shrink-0" />
+                                <div className="p-2 bg-primary/10 rounded-full"><Users className="w-5 h-5 text-primary" /></div>
                                 <div>
-                                    <h4 className="font-semibold">Community Focused</h4>
+                                    <h3 className="font-semibold">Community Focused</h3>
                                     <p className="text-muted-foreground text-sm">We believe in the power of local. Strengthen your community by hiring and working close to home.</p>
                                 </div>
                             </li>
                              <li className="flex items-start gap-4">
-                                <Heart className="w-6 h-6 text-primary mt-1 shrink-0" />
+                                <div className="p-2 bg-primary/10 rounded-full"><Heart className="w-5 h-5 text-primary" /></div>
                                 <div>
-                                    <h4 className="font-semibold">Simple and Transparent</h4>
+                                    <h3 className="font-semibold">Simple and Transparent</h3>
                                     <p className="text-muted-foreground text-sm">No hidden fees, no complicated processes. Just a straightforward platform for hiring and getting hired.</p>
                                 </div>
                             </li>
@@ -193,7 +206,7 @@ export default function Home() {
                         alt="Office discussion"
                         width={600}
                         height={600}
-                        className="rounded-lg shadow-md"
+                        className="rounded-lg shadow-lg"
                         data-ai-hint="team meeting"
                     />
                 </div>
@@ -203,13 +216,20 @@ export default function Home() {
         <section className="py-20 md:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
-                    <h3 className="text-3xl font-bold font-headline">Loved by Companies and Candidates</h3>
+                    <h2 className="text-3xl font-bold font-headline">Loved by Companies and Candidates</h2>
                     <p className="text-muted-foreground">Don't just take our word for it. Here's what people are saying.</p>
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {testimonials.map((testimonial, index) => (
-                        <Card key={index} className="flex flex-col justify-between">
+                        <Card key={index} className="flex flex-col justify-between bg-secondary/30 border-0">
                             <CardContent className="pt-6">
+                                <div className="flex gap-0.5 text-yellow-500 mb-2">
+                                  <Star className="w-5 h-5 fill-current" />
+                                  <Star className="w-5 h-5 fill-current" />
+                                  <Star className="w-5 h-5 fill-current" />
+                                  <Star className="w-5 h-5 fill-current" />
+                                  <Star className="w-5 h-5 fill-current" />
+                                </div>
                                 <p className="text-muted-foreground">"{testimonial.quote}"</p>
                             </CardContent>
                              <CardHeader className="flex-row gap-4 items-center">

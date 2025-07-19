@@ -54,7 +54,7 @@ export function JobCard({ job, hasApplied }: JobCardProps) {
   }
 
   return (
-    <Card onClick={handleCardClick} className="flex flex-col h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer">
+    <Card onClick={handleCardClick} className="flex flex-col h-full hover:shadow-xl transition-shadow duration-300 cursor-pointer hover:-translate-y-1">
       <CardHeader>
         <CardTitle className="hover:text-primary transition-colors">{job.title}</CardTitle>
         <CardDescription className="flex items-center gap-2 pt-1">
@@ -73,7 +73,7 @@ export function JobCard({ job, hasApplied }: JobCardProps) {
            {job.keywords.length > 3 && <Badge variant="outline">+{job.keywords.length - 3}</Badge>}
         </div>
       </CardContent>
-      <CardFooter className="flex justify-between items-center">
+      <CardFooter className="flex justify-between items-center bg-secondary/30 pt-4">
         <div className="text-sm text-muted-foreground flex items-center gap-2">
           <Clock className="w-4 h-4" />
           <span>{formatDistanceToNow(new Date(job.createdAt), { addSuffix: true })}</span>

@@ -138,15 +138,15 @@ export default function JobDetailPage() {
                         <CardHeader>
                             <CardTitle>Job Description</CardTitle>
                         </CardHeader>
-                        <CardContent className="prose prose-lg max-w-none text-muted-foreground">
+                        <CardContent className="prose prose-lg max-w-none text-foreground/80">
                             <p>{job.description}</p>
-                            <h4>Responsibilities</h4>
+                            <h4 className="text-foreground">Responsibilities</h4>
                             <ul>
                                 <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
                                 <li>Donec euismod, nisl eget consectetur, nisl nunc aliquet, nisl nunc aliquet.</li>
                                 <li>Maecenas aliquet, nisl eget consectetur, nisl nunc aliquet.</li>
                             </ul>
-                             <h4>Qualifications</h4>
+                             <h4 className="text-foreground">Qualifications</h4>
                             <ul>
                                 <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
                                 <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>

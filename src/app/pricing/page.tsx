@@ -1,10 +1,10 @@
-
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 const tiers = [
     {
@@ -18,7 +18,8 @@ const tiers = [
             "Community support"
         ],
         cta: "Sign Up Now",
-        href: "/register"
+        href: "/register",
+        isSeeker: true
     },
     {
         name: "Starter",
@@ -94,9 +95,39 @@ export default function PricingPage() {
             </p>
           </div>
           
-          <div className="mt-16 grid lg:grid-cols-5 gap-8 items-start">
-            {tiers.map(tier => (
-              <Card key={tier.name} className={`flex flex-col ${tier.popular ? 'border-primary shadow-lg scale-105' : ''} ${tier.name === 'Job Seeker' ? 'lg:col-span-2' : 'lg:col-span-1'}`}>
+          <div className="mt-16 grid lg:grid-cols-3 gap-8">
+            {tiers.filter(t => t.isSeeker).map(tier => (
+                 <Card key={tier.name} className="lg:col-span-3 flex flex-col md:flex-row justify-between items-center p-8 bg-primary/5 text-primary-foreground">
+                    <div className="flex-1 text-center md:text-left">
+                        <h2 className="text-2xl font-bold text-foreground">{tier.name}</h2>
+                        <p className="text-muted-foreground">{tier.description}</p>
+                        <div className="mt-4">
+                            <span className="text-4xl font-bold text-foreground">{tier.price}</span>
+                        </div>
+                    </div>
+                    <div className="w-px bg-border h-full mx-8 hidden md:block"></div>
+                    <div className="flex-1 text-center md:text-left my-6 md:my-0">
+                        <ul className="space-y-2">
+                             {tier.features.map(feature => (
+                                <li key={feature} className="flex items-center gap-2 text-muted-foreground">
+                                    <Check className="w-5 h-5 text-green-500" />
+                                    <span>{feature}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                     <div className="flex-1 flex justify-center md:justify-end">
+                        <Button asChild size="lg">
+                            <Link href={tier.href}>{tier.cta}</Link>
+                        </Button>
+                    </div>
+                </Card>
+            ))}
+          </div>
+
+          <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+            {tiers.filter(t => !t.isSeeker).map(tier => (
+              <Card key={tier.name} className={cn("flex flex-col h-full", tier.popular ? 'border-primary shadow-2xl scale-105' : '')}>
                 <CardHeader className="relative">
                   {tier.popular && <div className="absolute top-0 -translate-y-1/2 w-full flex justify-center"><div className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">MOST POPULAR</div></div>}
                   <CardTitle>{tier.name}</CardTitle>
@@ -109,8 +140,8 @@ export default function PricingPage() {
                     </div>
                   <ul className="space-y-4">
                     {tier.features.map(feature => (
-                      <li key={feature} className="flex items-center gap-2">
-                        <Check className="w-5 h-5 text-green-500" />
+                      <li key={feature} className="flex items-start gap-2">
+                        <Check className="w-5 h-5 text-green-500 mt-1 shrink-0" />
                         <span className="text-muted-foreground">{feature}</span>
                       </li>
                     ))}

@@ -89,14 +89,14 @@ export default function JobsPage() {
                 ))}
                 </div>
             ) : (
-                <div className="text-center py-16 bg-card rounded-lg">
-                <p className="text-xl font-semibold">No Jobs Found</p>
-                <p className="text-muted-foreground mt-2">
-                    {searchTerm 
-                    ? "Your search returned no results. Try adjusting your terms." 
-                    : "There are currently no job openings. Please check back later."
-                    }
-                </p>
+                <div className="text-center py-16 bg-card rounded-lg shadow-sm">
+                  <p className="text-xl font-semibold">No Jobs Found</p>
+                  <p className="text-muted-foreground mt-2">
+                      {searchTerm 
+                      ? "Your search returned no results. Try adjusting your terms." 
+                      : "There are currently no job openings. Please check back later."
+                      }
+                  </p>
                 </div>
             )}
         </div>
