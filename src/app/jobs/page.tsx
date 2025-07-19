@@ -1,7 +1,7 @@
 
-
 "use client";
 
+import { Suspense } from 'react';
 import { Button } from "@/components/ui/button";
 import { Briefcase, Search } from "lucide-react";
 import Link from "next/link";
@@ -17,7 +17,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useSearchParams } from 'next/navigation'
 
-export default function JobsPage() {
+function JobSearch() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [applications, setApplications] = useState<Application[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -49,39 +49,19 @@ export default function JobsPage() {
   }, [jobs, searchTerm]);
   
   const appliedJobIds = useMemo(() => new Set(applications.map(app => app.jobId)), [applications]);
-  
+
   return (
-    <div className="flex flex-col min-h-screen">
-      <SiteHeader />
-       <main className="flex-1 bg-secondary/50">
-        <div className="relative overflow-hidden">
-            <div 
-                className="absolute inset-0 -z-10 bg-background"
-                style={{
-                backgroundImage:
-                    'radial-gradient(circle at top, hsla(var(--primary) / 0.1), transparent 40%)',
-                }}
-            />
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                <Breadcrumbs />
-                <div className="text-center mb-12 mt-6">
-                    <h1 className="text-4xl font-extrabold tracking-tight">Find Your Next Job</h1>
-                    <p className="mt-4 text-lg text-muted-foreground">Browse all available positions from companies in your area.</p>
-                </div>
-                
-                <div className="relative w-full max-w-2xl mx-auto mb-12">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                    <Input
-                        placeholder="Search by title, company, location or keyword..."
-                        className="pl-10 h-12 text-base"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                </div>
-            </div>
-        </div>
-        
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <>
+      <div className="relative w-full max-w-2xl mx-auto mb-12">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+          <Input
+              placeholder="Search by title, company, location or keyword..."
+              className="pl-10 h-12 text-base"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+          />
+      </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
             {isLoading ? (
                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {[...Array(6)].map((_, i) => (
@@ -120,10 +100,38 @@ export default function JobsPage() {
                 </div>
             )}
         </div>
+    </>
+  )
+}
+
+export default function JobsPage() {
+  return (
+    <div className="flex flex-col min-h-screen">
+      <SiteHeader />
+       <main className="flex-1 bg-secondary/50">
+        <div className="relative overflow-hidden">
+            <div 
+                className="absolute inset-0 -z-10 bg-background"
+                style={{
+                backgroundImage:
+                    'radial-gradient(circle at top, hsla(var(--primary) / 0.1), transparent 40%)',
+                }}
+            />
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <Breadcrumbs />
+                <div className="text-center mb-12 mt-6">
+                    <h1 className="text-4xl font-extrabold tracking-tight">Find Your Next Job</h1>
+                    <p className="mt-4 text-lg text-muted-foreground">Browse all available positions from companies in your area.</p>
+                </div>
+                
+                <Suspense fallback={<div className="h-12 w-full max-w-2xl mx-auto"><Skeleton className="h-full w-full" /></div>}>
+                  <JobSearch />
+                </Suspense>
+            </div>
+        </div>
+        
       </main>
       <SiteFooter />
     </div>
   );
 }
-
-    
