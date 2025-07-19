@@ -1,5 +1,6 @@
 
-import type { User, Company, Job, Application } from "./types";
+
+import type { User, Company, Job, Application, ApplicationData } from "./types";
 
 let users: User[] = [
     { id: 'admin-1', email: 'admin@joblink.local', password: 'password', role: 'admin', name: 'Admin User' },
@@ -57,17 +58,7 @@ let jobs: Job[] = [
     }
 ];
 
-let applications: Application[] = [
-    {
-        id: 'app-1',
-        jobId: 'job-2',
-        jobTitle: 'Product Marketing Manager',
-        companyName: 'MarketMinds',
-        employeeId: 'employee-1',
-        employeeName: 'John Doe',
-        appliedAt: Date.now() - 1000 * 60 * 60 * 24, // 1 day ago
-    }
-];
+let applications: Application[] = [];
 
 const generateId = () => Math.random().toString(36).substring(2, 9);
 
@@ -165,7 +156,8 @@ export const getJobsByCompany = (companyId: string): Job[] => {
 }
 
 // Application functions
-export const applyForJob = (jobId: string, employeeId: string): Application => {
+export const applyForJob = (data: ApplicationData): Application => {
+    const { jobId, employeeId } = data;
     const job = jobs.find(j => j.id === jobId);
     const employee = users.find(u => u.id === employeeId);
 
@@ -181,10 +173,12 @@ export const applyForJob = (jobId: string, employeeId: string): Application => {
         id: generateId(),
         jobId,
         jobTitle: job.title,
+        companyId: job.companyId,
         companyName: job.companyName,
         employeeId,
         employeeName: employee.name || 'Unnamed Applicant',
         appliedAt: Date.now(),
+        data,
     };
     applications.push(newApplication);
     return newApplication;
@@ -196,5 +190,5 @@ export const getApplicationsForEmployee = (employeeId: string): Application[] =>
 
 export const getApplicationsForCompany = (companyId: string): Application[] => {
     const companyJobs = new Set(jobs.filter(j => j.companyId === companyId).map(j => j.id));
-    return applications.filter(a => companyJobs.has(a.jobId)).sort((a,b) => b.createdAt - a.createdAt);
+    return applications.filter(a => companyJobs.has(a.jobId)).sort((a,b) => a.appliedAt - b.appliedAt);
 }

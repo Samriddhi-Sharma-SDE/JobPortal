@@ -3,25 +3,25 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { getJobById, applyForJob, getApplicationsForEmployee } from "@/lib/mock-db";
+import { getJobById, getApplicationsForEmployee } from "@/lib/mock-db";
 import type { Job } from "@/lib/types";
 import { useAuth } from "@/hooks/use-auth";
-import { useToast } from "@/hooks/use-toast";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Briefcase, MapPin, Clock, Building, CheckCircle, ExternalLink } from "lucide-react";
+import { Briefcase, MapPin, Clock, Building, CheckCircle, ExternalLink, ArrowRight } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 export default function JobDetailPage() {
   const { id } = useParams();
+  const router = useRouter();
   const { user } = useAuth();
-  const { toast } = useToast();
   
   const [job, setJob] = useState<Job | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -42,28 +42,16 @@ export default function JobDetailPage() {
     }
   }, [id, user]);
 
-  const handleApply = () => {
+  const handleApplyClick = () => {
     if (!user || user.role !== 'employee') {
-      toast({ variant: 'destructive', title: 'Error', description: 'You must be logged in as an employee to apply.' });
-      return;
+       router.push('/login');
+       return;
     }
     if (job) {
-      try {
-        applyForJob(job.id, user.id);
-        toast({
-          title: "Application Sent!",
-          description: `You have successfully applied for the ${job.title} position.`,
-        });
-        setHasApplied(true);
-      } catch(e: any) {
-          toast({
-              variant: 'destructive',
-              title: 'Application Failed',
-              description: e.message || 'There was an error submitting your application.'
-          });
-      }
+        router.push(`/jobs/${job.id}/apply`);
     }
-  };
+  }
+
 
   if (isLoading) {
     return (
@@ -161,8 +149,16 @@ export default function JobDetailPage() {
                             <CardTitle>Ready to Apply?</CardTitle>
                         </CardHeader>
                         <CardContent className="text-center">
-                             <Button size="lg" className="w-full" onClick={handleApply} disabled={hasApplied}>
-                                {hasApplied ? <><CheckCircle className="mr-2" /> Applied</> : 'Apply Now'}
+                             <Button size="lg" className="w-full" onClick={handleApplyClick} disabled={hasApplied}>
+                                {hasApplied ? (
+                                    <>
+                                        <CheckCircle className="mr-2" /> Applied
+                                    </>
+                                 ) : (
+                                    <>
+                                        Apply Now <ArrowRight className="ml-2" />
+                                    </>
+                                 )}
                              </Button>
                              {hasApplied && <p className="text-sm text-green-600 mt-2">You have already applied for this position.</p>}
                         </CardContent>

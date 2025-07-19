@@ -1,3 +1,4 @@
+
 "use client";
 
 import { DashboardLayout, type NavItem } from "@/components/DashboardLayout";
@@ -11,6 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { format } from "date-fns";
+import { Badge } from "@/components/ui/badge";
 
 
 const employeeNavItems: NavItem[] = [
@@ -73,6 +75,7 @@ export default function EmployeeApplicationsPage() {
                             <TableHead>Job Title</TableHead>
                             <TableHead>Company</TableHead>
                             <TableHead>Date Applied</TableHead>
+                            <TableHead>Status</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -82,11 +85,12 @@ export default function EmployeeApplicationsPage() {
                                     <TableCell className="font-medium">{app.jobTitle}</TableCell>
                                     <TableCell>{app.companyName}</TableCell>
                                     <TableCell>{format(new Date(app.appliedAt), 'PPP')}</TableCell>
+                                    <TableCell><Badge variant="secondary">Submitted</Badge></TableCell>
                                 </TableRow>
                             ))
                         ) : (
                             <TableRow>
-                                <TableCell colSpan={3} className="h-24 text-center">
+                                <TableCell colSpan={4} className="h-24 text-center">
                                     You haven't applied to any jobs yet.
                                 </TableCell>
                             </TableRow>
