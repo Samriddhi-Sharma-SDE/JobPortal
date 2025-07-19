@@ -10,7 +10,8 @@ import type { Job, Application } from "@/lib/types";
 import { useEffect, useState, useMemo } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export default function JobsPage() {
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -41,22 +42,7 @@ export default function JobsPage() {
   
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Briefcase className="w-8 h-8 text-primary" />
-            <h1 className="text-2xl font-bold tracking-tight">JobLink Local</h1>
-          </Link>
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" asChild>
-              <Link href="/login">Login</Link>
-            </Button>
-            <Button asChild>
-              <Link href="/register">Register</Link>
-            </Button>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
        <main className="flex-1 bg-secondary/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div className="text-center mb-12">
@@ -113,25 +99,7 @@ export default function JobsPage() {
             )}
         </div>
       </main>
-      <footer className="bg-background border-t">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-              <div className="flex items-center gap-2">
-                <Briefcase className="w-6 h-6 text-primary" />
-                <h1 className="text-lg font-bold">JobLink Local</h1>
-              </div>
-              <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
-                  <Link href="/about" className="text-muted-foreground hover:text-foreground">About Us</Link>
-                  <Link href="/jobs" className="text-muted-foreground hover:text-foreground">Jobs</Link>
-                  <Link href="/contact" className="text-muted-foreground hover:text-foreground">Contact</Link>
-                  <Link href="/terms" className="text-muted-foreground hover:text-foreground">Terms of Service</Link>
-                  <Link href="/privacy" className="text-muted-foreground hover:text-foreground">Privacy Policy</Link>
-              </div>
-          </div>
-          <Separator className="my-6" />
-          <p className="text-center text-sm text-muted-foreground">© {new Date().getFullYear()} JobLink Local. All Rights Reserved.</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

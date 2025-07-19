@@ -16,8 +16,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import Link from "next/link";
-import { Briefcase } from "lucide-react";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -48,22 +48,7 @@ export default function ContactPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Briefcase className="w-8 h-8 text-primary" />
-            <h1 className="text-2xl font-bold tracking-tight">JobLink Local</h1>
-          </Link>
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" asChild>
-              <Link href="/login">Login</Link>
-            </Button>
-            <Button asChild>
-              <Link href="/register">Register</Link>
-            </Button>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
       <main className="flex-1 flex items-center justify-center bg-secondary/50 py-12">
         <Card className="w-full max-w-xl mx-4">
           <CardHeader>
@@ -120,11 +105,7 @@ export default function ContactPage() {
           </CardContent>
         </Card>
       </main>
-       <footer className="bg-background border-t">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <p className="text-center text-sm text-muted-foreground">© {new Date().getFullYear()} JobLink Local. All Rights Reserved.</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
