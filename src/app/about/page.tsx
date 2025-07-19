@@ -32,7 +32,7 @@ export default function AboutPage() {
           <Breadcrumbs />
           <div className="max-w-5xl mx-auto mt-6">
             <div className="text-center mb-16">
-                <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">About Job Portal</h1>
+                <h1 className="text-4xl font-extrabold tracking-tight">About Job Portal</h1>
                 <p className="mt-6 text-lg text-muted-foreground">
                 We're on a mission to reshape the local employment landscape, one connection at a time. Discover our story, our values, and the team making it all happen.
                 </p>
