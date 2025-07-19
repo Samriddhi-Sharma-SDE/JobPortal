@@ -55,7 +55,9 @@ export default function ContactPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
-      <main className="flex-1 bg-secondary/50">
+      <main className="flex-1 bg-secondary/50 relative overflow-hidden">
+        <div className="absolute -top-32 -left-32 -z-10 h-96 w-96 bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-32 -right-32 -z-10 h-96 w-96 bg-accent/10 rounded-full blur-3xl" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <Breadcrumbs />
           <div className="text-center mb-12 mt-6">

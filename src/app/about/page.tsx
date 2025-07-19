@@ -1,3 +1,4 @@
+
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import Link from "next/link";
@@ -17,7 +18,8 @@ export default function AboutPage() {
               Connecting talent with opportunities. We believe the best jobs are right around the corner.
             </p>
 
-            <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+            <div className="grid md:grid-cols-2 gap-12 items-center mb-16 relative">
+                 <div className="absolute -top-16 -left-16 -z-10 h-64 w-64 bg-primary/10 rounded-full blur-3xl" />
                 <div className="space-y-4">
                     <h2 className="text-3xl font-bold">Our Mission</h2>
                     <p className="text-muted-foreground">
@@ -37,7 +39,8 @@ export default function AboutPage() {
                  />
             </div>
 
-             <div className="grid md:grid-cols-2 gap-12 items-center">
+             <div className="grid md:grid-cols-2 gap-12 items-center relative">
+                 <div className="absolute -bottom-16 -right-16 -z-10 h-64 w-64 bg-accent/10 rounded-full blur-3xl" />
                  <Image
                     src="https://placehold.co/600x400.png"
                     alt="A vibrant local community event"
