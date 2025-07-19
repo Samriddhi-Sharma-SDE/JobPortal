@@ -4,7 +4,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Building2, User, UserCheck, Zap, Users, Heart, Star, Briefcase, Search, CheckCircle, Code, Megaphone, BarChartHorizontal } from "lucide-react";
+import { Building2, User, UserCheck, Zap, Users, Heart, Star, Briefcase, Search, CheckCircle, Code, Megaphone, BarChartHorizontal, ArrowRight, FileText, UserPlus, FileSignature } from "lucide-react";
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -38,6 +38,30 @@ const featuredJobs = [
     tags: ["AWS", "GCP", "DevOps"],
     href: "/jobs/job-3"
   },
+  {
+    title: "Data Scientist",
+    company: "MarketMinds",
+    location: "New York, NY",
+    type: "Full-time",
+    tags: ["Python", "ML", "SQL"],
+    href: "/jobs/job-4"
+  },
+  {
+    title: "AI Research Scientist",
+    company: "DataNexus AI",
+    location: "Palo Alto, CA",
+    type: "Full-time",
+    tags: ["AI", "NLP", "PyTorch"],
+    href: "/jobs/job-5"
+  },
+  {
+    title: "Registered Nurse",
+    company: "HealthWell Clinic",
+    location: "Chicago, IL",
+    type: "Part-time",
+    tags: ["Healthcare", "RN", "Patient Care"],
+    href: "/jobs/job-6"
+  }
 ];
 
 const testimonials = [
@@ -119,6 +143,7 @@ export default function Home() {
                     name="search"
                     placeholder="Job title, keyword, or company"
                     className="pl-12 pr-24 h-14 text-base rounded-full shadow-lg"
+                    spellCheck={false}
                 />
                 <Button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2 h-10 rounded-full px-6">
                     Search
@@ -153,76 +178,91 @@ export default function Home() {
 
         <section className="py-20 md:py-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold">How It Works</h2>
-              <p className="text-muted-foreground">A simple process for every user.</p>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold">A Simple Path to Your Goals</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Whether you're hiring or looking for a new role, our streamlined process makes it easy to get started.
+              </p>
             </div>
-            <div className="grid md:grid-cols-3 gap-8">
-              <Card className="text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-                <CardHeader>
-                  <div className="mx-auto bg-primary/10 p-3 rounded-full w-fit">
-                    <Building2 className="w-8 h-8 text-primary" />
+            
+            <div className="relative">
+              {/* Desktop timeline line */}
+              <div className="hidden md:block absolute top-8 left-1/2 -translate-x-1/2 w-px h-[calc(100%-4rem)] bg-border"></div>
+
+              {/* Step 1 */}
+              <div className="relative flex md:justify-center mb-12 md:mb-0">
+                <div className="md:w-1/2 md:pr-12">
+                  <div className="bg-card p-6 rounded-lg shadow-lg border border-transparent hover:border-primary transition-all text-center md:text-right">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-xl mb-4">1</div>
+                    <div className="mb-2 inline-flex items-center gap-2"><UserPlus className="w-5 h-5 text-primary" /> For Job Seekers</div>
+                    <h3 className="text-xl font-semibold mb-2">Create Your Profile</h3>
+                    <p className="text-muted-foreground">Sign up for free, build a standout profile, and let local employers find you. Set up job alerts to never miss an opportunity.</p>
                   </div>
-                  <CardTitle className="pt-4">For Companies</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    Register, get approved, and post jobs. Use our AI to suggest powerful keywords and attract top talent.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-                <CardHeader>
-                   <div className="mx-auto bg-primary/10 p-3 rounded-full w-fit">
-                    <User className="w-8 h-8 text-primary" />
+                </div>
+                <div className="hidden md:flex md:w-1/2 justify-start items-center pl-12"></div>
+                 <div className="hidden md:block absolute top-6 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-primary border-4 border-background"></div>
+              </div>
+
+               {/* Step 2 */}
+              <div className="relative flex md:justify-center mb-12 md:mb-0">
+                 <div className="hidden md:flex md:w-1/2 justify-end items-center pr-12"></div>
+                <div className="md:w-1/2 md:pl-12">
+                  <div className="bg-card p-6 rounded-lg shadow-lg border border-transparent hover:border-primary transition-all text-center md:text-left">
+                     <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-xl mb-4">2</div>
+                    <div className="mb-2 inline-flex items-center gap-2"><Building2 className="w-5 h-5 text-primary" /> For Companies</div>
+                    <h3 className="text-xl font-semibold mb-2">Post a Job</h3>
+                    <p className="text-muted-foreground">Register your company, get approved by our admins, and post your job listing. Use our AI tools to attract top-tier talent.</p>
                   </div>
-                  <CardTitle className="pt-4">For Employees</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    Create a profile, browse local job opportunities, and apply with a single click. Your dream job is waiting.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-                <CardHeader>
-                   <div className="mx-auto bg-primary/10 p-3 rounded-full w-fit">
-                    <UserCheck className="w-8 h-8 text-primary" />
+                </div>
+                 <div className="hidden md:block absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-primary border-4 border-background"></div>
+              </div>
+
+               {/* Step 3 */}
+              <div className="relative flex md:justify-center">
+                <div className="md:w-1/2 md:pr-12">
+                   <div className="bg-card p-6 rounded-lg shadow-lg border border-transparent hover:border-primary transition-all text-center md:text-right">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-xl mb-4">3</div>
+                     <div className="mb-2 inline-flex items-center gap-2"><FileSignature className="w-5 h-5 text-primary" /> Connect & Apply</div>
+                    <h3 className="text-xl font-semibold mb-2">Make the Connection</h3>
+                    <p className="text-muted-foreground">Job seekers can apply with a few clicks. Companies receive applications directly to their dashboard, making the hiring process seamless.</p>
                   </div>
-                  <CardTitle className="pt-4">For Admins</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    Maintain platform integrity by reviewing and approving new company registrations for a high-quality experience.
-                  </p>
-                </CardContent>
-              </Card>
+                </div>
+                <div className="hidden md:flex md:w-1/2 justify-start items-center pl-12"></div>
+                 <div className="hidden md:block absolute bottom-6 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-primary border-4 border-background"></div>
+              </div>
             </div>
           </div>
         </section>
 
         <section className="py-20 md:py-24 relative overflow-hidden bg-secondary/50">
             <div className="absolute -left-48 -top-48 -z-10 h-96 w-96 bg-primary/5 rounded-full blur-3xl" />
+            <div className="absolute -right-48 -bottom-48 -z-10 h-96 w-96 bg-accent/5 rounded-full blur-3xl" />
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                  <div className="text-center mb-12">
                     <h2 className="text-3xl font-bold">Featured Jobs</h2>
-                    <p className="text-muted-foreground">Check out these hot opportunities from top local companies.</p>
+                    <p className="text-muted-foreground max-w-2xl mx-auto">Check out these hot opportunities from top local companies. Your next career move could be here.</p>
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {featuredJobs.map((job, index) => (
-                        <Card key={index} className="flex flex-col transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl bg-card">
+                        <Card key={index} className="flex flex-col transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl bg-card/80 backdrop-blur-sm">
                             <CardHeader>
-                                <CardTitle>{job.title}</CardTitle>
+                                <div className="flex justify-between items-start">
+                                    <CardTitle className="hover:text-primary transition-colors"><Link href={job.href}>{job.title}</Link></CardTitle>
+                                    <div className="p-2 bg-primary/10 rounded-md">
+                                        <Briefcase className="w-5 h-5 text-primary" />
+                                    </div>
+                                </div>
                                 <CardDescription>{job.company} - {job.location}</CardDescription>
                             </CardHeader>
                             <CardContent className="flex-grow">
                                 <div className="flex flex-wrap gap-2">
-                                    {job.tags.map(tag => <Badge key={tag} variant="secondary">{tag}</Badge>)}
+                                    <Badge variant="secondary">{job.type}</Badge>
+                                    {job.tags.map(tag => <Badge key={tag} variant="outline">{tag}</Badge>)}
                                 </div>
                             </CardContent>
                             <CardFooter>
                                <Button asChild className="w-full">
-                                    <Link href={job.href}>View Job</Link>
+                                    <Link href={job.href}>View Job <ArrowRight className="ml-2 h-4 w-4" /></Link>
                                </Button>
                             </CardFooter>
                         </Card>
@@ -247,22 +287,22 @@ export default function Home() {
                             <li className="flex items-start gap-4">
                                 <div className="p-2 bg-primary/10 rounded-full"><Zap className="w-5 h-5 text-primary" /></div>
                                 <div>
-                                    <h3 className="font-semibold">AI-Powered Matching</h3>
-                                    <p className="text-muted-foreground text-sm">Our smart algorithms help companies find the right candidates and job seekers discover their perfect role.</p>
+                                    <h3 className="font-semibold">AI-Powered Keyword Suggestions</h3>
+                                    <p className="text-muted-foreground text-sm">Our Genkit-powered tools analyze job descriptions and suggest relevant keywords to attract a wider, more qualified pool of candidates, saving you time and improving match quality.</p>
                                 </div>
                             </li>
                             <li className="flex items-start gap-4">
                                 <div className="p-2 bg-primary/10 rounded-full"><Users className="w-5 h-5 text-primary" /></div>
                                 <div>
-                                    <h3 className="font-semibold">Community Focused</h3>
-                                    <p className="text-muted-foreground text-sm">We believe in the power of local. Strengthen your community by hiring and working close to home.</p>
+                                    <h3 className="font-semibold">Deep Community Focus</h3>
+                                    <p className="text-muted-foreground text-sm">We believe in the power of local economies. By focusing on local talent, we help reduce commute times, strengthen communities, and build a more connected workforce.</p>
                                 </div>
                             </li>
                              <li className="flex items-start gap-4">
-                                <div className="p-2 bg-primary/10 rounded-full"><Heart className="w-5 h-5 text-primary" /></div>
+                                <div className="p-2 bg-primary/10 rounded-full"><FileText className="w-5 h-5 text-primary" /></div>
                                 <div>
-                                    <h3 className="font-semibold">Simple and Transparent</h3>
-                                    <p className="text-muted-foreground text-sm">No hidden fees, no complicated processes. Just a straightforward platform for hiring and getting hired.</p>
+                                    <h3 className="font-semibold">Streamlined Application Process</h3>
+                                    <p className="text-muted-foreground text-sm">Our multi-step application form is designed to be intuitive and easy to follow, ensuring a smooth experience for job seekers and structured, complete applications for employers.</p>
                                 </div>
                             </li>
                         </ul>
