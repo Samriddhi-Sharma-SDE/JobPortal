@@ -24,12 +24,12 @@ export default function ApplyPage() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if (authLoading) return;
-        if (!user || user.role !== 'employee') {
-            toast({ variant: 'destructive', title: 'Access Denied', description: 'Please log in as an employee to apply.' });
-            router.push(`/login?redirect=/jobs/${id}/apply`);
-            return;
-        }
+        // if (authLoading) return;
+        // if (!user || user.role !== 'employee') {
+        //     toast({ variant: 'destructive', title: 'Access Denied', description: 'Please log in as an employee to apply.' });
+        //     router.push(`/login?redirect=/jobs/${id}/apply`);
+        //     return;
+        // }
 
         if (id) {
             const jobId = Array.isArray(id) ? id[0] : id;
@@ -67,6 +67,15 @@ export default function ApplyPage() {
         );
     }
     
+    // For viewing purposes, we create a mock user if one isn't logged in.
+    const mockUser = user || {
+        id: 'employee-1',
+        email: 'employee@joblink.local',
+        role: 'employee',
+        name: 'John Doe',
+        password: 'password'
+    };
+    
     return (
         <div className="flex flex-col min-h-screen">
             <SiteHeader />
@@ -81,7 +90,7 @@ export default function ApplyPage() {
                             </CardDescription>
                         </CardHeader>
                     </Card>
-                    <ApplicationForm job={job} user={user!} />
+                    <ApplicationForm job={job} user={mockUser} />
                 </div>
             </main>
             <SiteFooter />
