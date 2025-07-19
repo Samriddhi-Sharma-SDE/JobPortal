@@ -67,7 +67,7 @@ const featuredJobs = [
 
 const testimonials = [
   {
-    quote: "Job Portal was a game-changer for our recruitment process. The AI keyword suggestions helped us reach the right talent faster than ever before.",
+    quote: "Job Portal was a game-changer for our recruitment process. The local focus helped us reach the right talent faster than ever before.",
     name: "Sarah Johnson",
     role: "HR Manager, InnovateTech",
     avatar: "https://placehold.co/100x100.png",
@@ -134,7 +134,7 @@ const companyPath = [
     {
         icon: <Megaphone className="w-8 h-8 text-primary" />,
         title: "2. Post a Job Listing",
-        description: "Craft the perfect job post with our intuitive form. Leverage our Genkit-powered AI to suggest relevant keywords, ensuring your listing reaches the most qualified candidates in your area."
+        description: "Craft the perfect job post with our intuitive form. Ensure your listing reaches the most qualified candidates in your area with relevant keywords."
     },
     {
         icon: <Users className="w-8 h-8 text-primary" />,
@@ -221,7 +221,7 @@ export default function Home() {
           <div className="relative z-10 w-full">
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter mb-4">Find Your Next Opportunity, Locally.</h1>
             <p className="max-w-3xl mx-auto text-lg md:text-xl text-muted-foreground mb-8">
-              Job Portal connects talented professionals with innovative companies in their area. Powered by AI to help you find the perfect match.
+              Job Portal connects talented professionals with innovative companies in their area. Find the perfect match.
             </p>
             
             <form onSubmit={handleSearch} className="relative w-full max-w-2xl mx-auto mb-8">
@@ -345,8 +345,8 @@ export default function Home() {
                             <li className="flex items-start gap-4">
                                 <div className="p-2 bg-primary/10 rounded-full"><Zap className="w-5 h-5 text-primary" /></div>
                                 <div>
-                                    <h3 className="font-semibold">AI-Powered Keyword Suggestions</h3>
-                                    <p className="text-muted-foreground text-sm">Our Genkit-powered tools analyze job descriptions and suggest relevant keywords to attract a wider, more qualified pool of candidates, saving you time and improving match quality.</p>
+                                    <h3 className="font-semibold">Local Focus</h3>
+                                    <p className="text-muted-foreground text-sm">Our tools help you find relevant jobs and candidates in your area, saving you time and improving match quality.</p>
                                 </div>
                             </li>
                             <li className="flex items-start gap-4">
@@ -422,5 +422,3 @@ export default function Home() {
     </div>
   );
 }
-
-    

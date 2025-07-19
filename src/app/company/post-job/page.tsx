@@ -19,12 +19,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useAuth } from "@/hooks/use-auth";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { addJob } from "@/lib/mock-db";
 import { DashboardLayout, type NavItem } from "@/components/DashboardLayout";
 import { LayoutDashboard, PlusCircle, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { KeywordSuggester } from "@/components/KeywordSuggester";
 
 const companyNavItems: NavItem[] = [
   { href: "/company/dashboard", label: "Dashboard", icon: <LayoutDashboard className="w-5 h-5" /> },
@@ -56,17 +55,6 @@ export default function PostJobPage() {
     control: form.control,
     name: "keywords",
   });
-  
-  const jobTitle = form.watch("title");
-  const jobDescription = form.watch("description");
-
-  // useEffect(() => {
-  //   if (!authLoading) {
-  //     if (!user || user.role !== 'company') {
-  //       router.push('/login');
-  //     }
-  //   }
-  // }, [user, authLoading, router]);
 
   const handleAddKeyword = () => {
     if (keywordInput.trim() !== "" && !fields.some(field => field.value === keywordInput.trim())) {
@@ -74,11 +62,6 @@ export default function PostJobPage() {
       setKeywordInput("");
     }
   };
-  
-  const handleAddSuggestedKeywords = (keywords: string[]) => {
-     const uniqueKeywords = keywords.filter(kw => !fields.some(field => field.value === kw));
-     uniqueKeywords.forEach(kw => append(kw));
-  }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Mock companyId when not logged in
@@ -179,13 +162,6 @@ export default function PostJobPage() {
                   </div>
                  {form.formState.errors.keywords && <p className="text-sm font-medium text-destructive">{form.formState.errors.keywords.message}</p>}
               </div>
-
-              <KeywordSuggester 
-                jobTitle={jobTitle}
-                jobDescription={jobDescription}
-                onKeywordsAdd={handleAddSuggestedKeywords}
-                currentKeywords={fields.map(f => f.value)}
-              />
 
               <Button type="submit" disabled={form.formState.isSubmitting}>
                 {form.formState.isSubmitting ? "Posting Job..." : "Post Job"}

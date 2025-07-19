@@ -114,7 +114,7 @@ export default function AboutPage() {
                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                      {values.map(value => (
                          <Card key={value.title} className="text-center p-6 border-0 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-transform duration-300">
-                             <div className="flex justify-center items-center mb-4 bg-primary/10 rounded-full w-16 h-16 mx-auto">
+                             <div className="flex justify-center items-center bg-primary/10 rounded-full w-16 h-16 mx-auto">
                                 {value.icon}
                              </div>
                              <h3 className="text-xl font-semibold mb-2">{value.title}</h3>
@@ -130,13 +130,13 @@ export default function AboutPage() {
                     <div className="space-y-4">
                         <Badge variant="secondary">Why Choose Us</Badge>
                         <h2 className="text-3xl font-bold">The Smarter Way to Hire and Get Hired</h2>
-                        <p className="text-muted-foreground pb-4">We're not just another job board. We're a dedicated platform for local communities, enhanced with cutting-edge technology to make connections that matter.</p>
+                        <p className="text-muted-foreground pb-4">We're not just another job board. We're a dedicated platform for local communities, designed to make connections that matter.</p>
                         <ul className="space-y-4">
                             <li className="flex items-start gap-3">
                                 <Check className="w-5 h-5 text-green-500 mt-1" />
                                 <div>
-                                    <h3 className="font-semibold">AI-Powered Keyword Suggestions</h3>
-                                    <p className="text-muted-foreground text-sm">Our smart algorithms help companies craft job descriptions that attract the right candidates.</p>
+                                    <h3 className="font-semibold">Efficient Job Posting</h3>
+                                    <p className="text-muted-foreground text-sm">Our tools help companies craft job descriptions that attract the right candidates.</p>
                                 </div>
                             </li>
                             <li className="flex items-start gap-3">
