@@ -12,6 +12,7 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const featuredJobs = [
   {
@@ -101,6 +102,52 @@ const FloatingIcon = ({ icon, className }: { icon: React.ReactNode, className: s
     </div>
 )
 
+const seekerPath = [
+    {
+        icon: <UserPlus className="w-8 h-8 text-primary" />,
+        title: "1. Create Your Profile",
+        description: "Sign up for a free account in minutes. Build a comprehensive profile that showcases your skills, experience, and career aspirations. Think of it as your dynamic, online resume that works for you 24/7."
+    },
+    {
+        icon: <Search className="w-8 h-8 text-primary" />,
+        title: "2. Discover Opportunities",
+        description: "Use our powerful search and filter tools to browse thousands of local job openings. Set up personalized job alerts, so you never miss out on a role that fits your unique criteria. Let the opportunities come to you."
+    },
+    {
+        icon: <FileSignature className="w-8 h-8 text-primary" />,
+        title: "3. Apply with Ease",
+        description: "Our streamlined, multi-step application process makes it simple to apply for jobs. Submit your profile, upload your resume, and track all your applications from a single, convenient dashboard."
+    },
+    {
+        icon: <CheckCircle className="w-8 h-8 text-primary" />,
+        title: "4. Get Hired",
+        description: "Connect with top local employers, ace your interviews, and land your dream job. Your next career move is closer than you think. Start your journey with Job Portal today."
+    },
+]
+
+const companyPath = [
+    {
+        icon: <Building2 className="w-8 h-8 text-primary" />,
+        title: "1. Register Your Company",
+        description: "Create your company profile and tell your story. Once submitted, our admin team will quickly review and approve your account, giving you access to our pool of local talent."
+    },
+    {
+        icon: <Megaphone className="w-8 h-8 text-primary" />,
+        title: "2. Post a Job Listing",
+        description: "Craft the perfect job post with our intuitive form. Leverage our Genkit-powered AI to suggest relevant keywords, ensuring your listing reaches the most qualified candidates in your area."
+    },
+    {
+        icon: <Users className="w-8 h-8 text-primary" />,
+        title: "3. Manage Applicants",
+        description: "Receive and review applications directly on your company dashboard. Our system organizes applicant information, making it easy to identify top candidates and manage your hiring pipeline efficiently."
+    },
+    {
+        icon: <UserCheck className="w-8 h-8 text-primary" />,
+        title: "4. Hire Top Talent",
+        description: "Connect with the best professionals in your community and build a team that will drive your business forward. Simplify your recruitment process and find the perfect hire with Job Portal."
+    }
+]
+
 export default function Home() {
     const router = useRouter();
     
@@ -181,62 +228,53 @@ export default function Home() {
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold">A Simple Path to Your Goals</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Whether you're hiring or looking for a new role, our streamlined process makes it easy to get started.
+                Our platform is designed for a seamless experience. Follow the path that fits you best.
               </p>
             </div>
             
-            <div className="relative">
-              {/* Desktop timeline line */}
-              <div className="hidden md:block absolute top-8 left-1/2 -translate-x-1/2 w-px h-[calc(100%-4rem)] bg-border"></div>
-
-              {/* Step 1 */}
-              <div className="relative flex md:justify-center mb-12 md:mb-0">
-                <div className="md:w-1/2 md:pr-12">
-                  <div className="bg-card p-6 rounded-lg shadow-lg border border-transparent hover:border-primary transition-all text-center md:text-right">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-xl mb-4">1</div>
-                    <div className="mb-2 inline-flex items-center gap-2"><UserPlus className="w-5 h-5 text-primary" /> For Job Seekers</div>
-                    <h3 className="text-xl font-semibold mb-2">Create Your Profile</h3>
-                    <p className="text-muted-foreground">Sign up for free, build a standout profile, and let local employers find you. Set up job alerts to never miss an opportunity.</p>
-                  </div>
-                </div>
-                <div className="hidden md:flex md:w-1/2 justify-start items-center pl-12"></div>
-                 <div className="hidden md:block absolute top-6 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-primary border-4 border-background"></div>
-              </div>
-
-               {/* Step 2 */}
-              <div className="relative flex md:justify-center mb-12 md:mb-0">
-                 <div className="hidden md:flex md:w-1/2 justify-end items-center pr-12"></div>
-                <div className="md:w-1/2 md:pl-12">
-                  <div className="bg-card p-6 rounded-lg shadow-lg border border-transparent hover:border-primary transition-all text-center md:text-left">
-                     <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-xl mb-4">2</div>
-                    <div className="mb-2 inline-flex items-center gap-2"><Building2 className="w-5 h-5 text-primary" /> For Companies</div>
-                    <h3 className="text-xl font-semibold mb-2">Post a Job</h3>
-                    <p className="text-muted-foreground">Register your company, get approved by our admins, and post your job listing. Use our AI tools to attract top-tier talent.</p>
-                  </div>
-                </div>
-                 <div className="hidden md:block absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-primary border-4 border-background"></div>
-              </div>
-
-               {/* Step 3 */}
-              <div className="relative flex md:justify-center">
-                <div className="md:w-1/2 md:pr-12">
-                   <div className="bg-card p-6 rounded-lg shadow-lg border border-transparent hover:border-primary transition-all text-center md:text-right">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-xl mb-4">3</div>
-                     <div className="mb-2 inline-flex items-center gap-2"><FileSignature className="w-5 h-5 text-primary" /> Connect & Apply</div>
-                    <h3 className="text-xl font-semibold mb-2">Make the Connection</h3>
-                    <p className="text-muted-foreground">Job seekers can apply with a few clicks. Companies receive applications directly to their dashboard, making the hiring process seamless.</p>
-                  </div>
-                </div>
-                <div className="hidden md:flex md:w-1/2 justify-start items-center pl-12"></div>
-                 <div className="hidden md:block absolute bottom-6 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-primary border-4 border-background"></div>
-              </div>
-            </div>
+             <Tabs defaultValue="job-seekers" className="w-full">
+                <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
+                    <TabsTrigger value="job-seekers">For Job Seekers</TabsTrigger>
+                    <TabsTrigger value="companies">For Companies</TabsTrigger>
+                </TabsList>
+                <TabsContent value="job-seekers">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+                        {seekerPath.map((step) => (
+                            <Card key={step.title} className="text-center p-6 border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                <div className="flex justify-center items-center mb-4 bg-primary/10 rounded-full w-16 h-16 mx-auto">
+                                    {step.icon}
+                                </div>
+                                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                                <p className="text-muted-foreground text-sm">{step.description}</p>
+                            </Card>
+                        ))}
+                    </div>
+                </TabsContent>
+                <TabsContent value="companies">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+                        {companyPath.map((step) => (
+                            <Card key={step.title} className="text-center p-6 border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                <div className="flex justify-center items-center mb-4 bg-primary/10 rounded-full w-16 h-16 mx-auto">
+                                    {step.icon}
+                                </div>
+                                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                                <p className="text-muted-foreground text-sm">{step.description}</p>
+                            </Card>
+                        ))}
+                    </div>
+                </TabsContent>
+            </Tabs>
           </div>
         </section>
 
         <section className="py-20 md:py-24 relative overflow-hidden bg-secondary/50">
-            <div className="absolute -left-48 -top-48 -z-10 h-96 w-96 bg-primary/5 rounded-full blur-3xl" />
-            <div className="absolute -right-48 -bottom-48 -z-10 h-96 w-96 bg-accent/5 rounded-full blur-3xl" />
+            <div 
+                className="absolute inset-0 -z-10"
+                style={{
+                backgroundImage:
+                    'radial-gradient(circle at top left, hsla(var(--primary) / 0.05), transparent 30%), radial-gradient(circle at bottom right, hsla(var(--accent) / 0.05), transparent 30%)',
+                }}
+            />
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                  <div className="text-center mb-12">
                     <h2 className="text-3xl font-bold">Featured Jobs</h2>
@@ -244,7 +282,7 @@ export default function Home() {
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {featuredJobs.map((job, index) => (
-                        <Card key={index} className="flex flex-col transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl bg-card/80 backdrop-blur-sm">
+                        <Card key={index} className="flex flex-col transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl bg-card">
                             <CardHeader>
                                 <div className="flex justify-between items-start">
                                     <CardTitle className="hover:text-primary transition-colors"><Link href={job.href}>{job.title}</Link></CardTitle>
